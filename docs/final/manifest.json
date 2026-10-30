@@ -50,13 +50,13 @@
   ],
   "confirmedAccount": {
     "sayknow": "이승현",
-    "jojunsu98": "조준수"
+    "jojunsu98": "조준수",
+    "etu9317cw": "윤준서",
+    "daguri2963": "배창민",
+    "woogie0403": "김재욱"
   },
   "submissionReady": false,
-  "pendingEvidence": [
-    "five actual target users with target eligibility and anonymized originals; test dates supplied by team",
-    "self-written contributions and individual evidence for all five members"
-  ],
+  "pendingEvidence": [],
   "documents": [
     "README.md",
     "CONTRIBUTING.md",
@@ -223,11 +223,11 @@
     "pdf": "docs/presentation.pdf",
     "pages": 12,
     "synchronizedOn": "2026-10-30",
-    "scope": "Reviewed summary; source dates and unverified user/contribution evidence stay explicit.",
+    "scope": "Reviewed summary with source dates, project-owner-confirmed document/video contributions and feedback summaries; final assessment remains separate.",
     "sha256": {
-      "markdown": "484461d967605b7476001e786f393986aa1c7d2f99a754e78041d47150621e39",
-      "html": "333fcff791bde7e1bd113ddb1b9165b6aa899e11d9d5e9491e9873dca6fcae91",
-      "pdf": "05e4c3bfee19106cafbbe124a3d855b215a81dc432426648fc03db876094c332"
+      "markdown": "eaab09ce0259d1115736f36863082756918d5206cc2696e181b0dd5bdacb31c5",
+      "html": "4ea5fa55a1d22f09b390ecac56c03bf4f555a1d8250a9b50a7bb53f86dd00716",
+      "pdf": "ab8636d34cc19296db640902952d5c9024c25aa5e67b50506c5e45f1b91c9cc0"
     }
   },
   "demoVideo": {
@@ -240,6 +240,116 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "sha256": "bc79096fd0dcbc0f727cf759ffdc790cf99d165f592a5b09ae0af26b48a5116e",
-    "readmeSection": "README.md#시연-영상"
+    "readmeSection": "README.md#시연-영상",
+    "creator": "윤준서",
+    "creatorConfirmedOn": "2026-10-30",
+    "attributionSource": "project owner statement"
+  },
+  "submissionReview": {
+    "status": "pending_final_review_and_production_promotion",
+    "remainingActions": [
+      "team members review contribution summaries",
+      "promote latest changes and verify production",
+      "connect repository and submit on platform"
+    ],
+    "technicalChecksDoNotDetermineFinalAssessment": true
+  },
+  "teamContributionConfirmation": {
+    "date": "2026-10-30",
+    "source": "project owner statement",
+    "documentContributors": [
+      "김재욱",
+      "배창민",
+      "윤준서"
+    ],
+    "demoVideoCreator": "윤준서",
+    "githubAccountsLimitedToVerifiedMapping": true,
+    "accountMappingConfirmedOn": "2026-10-30"
+  },
+  "feedbackReporting": {
+    "method": "team-provided question summaries and documented improvements",
+    "individualResponseAttachmentsRequiredByProject": false,
+    "minimumActualTargetUsersRequired": 5,
+    "developerQACountedAsActualUsers": false
+  },
+  "forkContributions": [
+    {
+      "person": "윤준서",
+      "proposerAccount": "etu9317cw",
+      "repository": "etu9317cw/M2-1",
+      "pullRequest": 12,
+      "commits": [
+        {
+          "sha": "c8b94625d787c7221fcbff4d6d8241497572e530",
+          "authorAccount": "etu9317cw",
+          "url": "https://github.com/sayknow/M2-1/commit/c8b94625d787c7221fcbff4d6d8241497572e530"
+        },
+        {
+          "sha": "628b141263b8042a41c2ceccc3669383d8e66e89",
+          "authorAccount": "etu9317cw",
+          "url": "https://github.com/sayknow/M2-1/commit/628b141263b8042a41c2ceccc3669383d8e66e89"
+        }
+      ],
+      "mergedOnKst": "2026-10-28",
+      "forkUrl": "https://github.com/etu9317cw/M2-1",
+      "pullRequestUrl": "https://github.com/sayknow/M2-1/pull/12",
+      "parentRepository": "sayknow/M2-1",
+      "targetBranch": "canary",
+      "mergedBy": "sayknow",
+      "verifiedOn": "2026-10-30",
+      "accountMappingSource": "project owner statement"
+    },
+    {
+      "person": "배창민",
+      "proposerAccount": "daguri2963",
+      "repository": "daguri2963/M2-1",
+      "pullRequest": 13,
+      "commits": [
+        {
+          "sha": "21865efb6d2af037fdf39eaf59d4bd0c20bbf709",
+          "authorAccount": "daguri2963",
+          "url": "https://github.com/sayknow/M2-1/commit/21865efb6d2af037fdf39eaf59d4bd0c20bbf709"
+        }
+      ],
+      "mergedOnKst": "2026-10-29",
+      "forkUrl": "https://github.com/daguri2963/M2-1",
+      "pullRequestUrl": "https://github.com/sayknow/M2-1/pull/13",
+      "parentRepository": "sayknow/M2-1",
+      "targetBranch": "canary",
+      "mergedBy": "sayknow",
+      "verifiedOn": "2026-10-30",
+      "accountMappingSource": "project owner statement"
+    },
+    {
+      "person": "김재욱",
+      "proposerAccount": "woogie0403",
+      "repository": "woogie0403/M2-1-final",
+      "pullRequest": 14,
+      "commits": [
+        {
+          "sha": "ff2d34822bbb2261668d56b9375e028eff7d27fb",
+          "authorAccount": "love4xox",
+          "url": "https://github.com/sayknow/M2-1/commit/ff2d34822bbb2261668d56b9375e028eff7d27fb",
+          "authorIdentityStatus": "unconfirmed"
+        }
+      ],
+      "mergedOnKst": "2026-10-29",
+      "forkUrl": "https://github.com/woogie0403/M2-1-final",
+      "pullRequestUrl": "https://github.com/sayknow/M2-1/pull/14",
+      "parentRepository": "sayknow/M2-1",
+      "targetBranch": "canary",
+      "mergedBy": "sayknow",
+      "verifiedOn": "2026-10-30",
+      "accountMappingSource": "project owner statement"
+    }
+  ],
+  "unidentifiedAccounts": {
+    "love4xox": {
+      "identityStatus": "unconfirmed",
+      "teamMembership": "unconfirmed",
+      "countedAsConfirmedTeamAccount": false,
+      "source": "project owner correction",
+      "updatedOn": "2026-10-30"
+    }
   }
 }

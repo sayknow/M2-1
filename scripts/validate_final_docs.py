@@ -203,8 +203,50 @@ def main():
     assert release['commit'] == local['baselineCommit'] == manifest['baselineCommit']
     assert release['passed'] and all(c['passed'] for c in local['checks'])
     assert len(manifest['team']) == 5 and len(set(manifest['team'])) == 5
-    assert manifest['confirmedAccount'] == {'sayknow': '이승현', 'jojunsu98': '조준수'}
-    assert manifest['submissionReady'] is False and manifest['pendingEvidence']
+    accounts = manifest['confirmedAccount']
+    assert accounts['sayknow'] == '이승현'
+    assert accounts['jojunsu98'] == '조준수'
+    assert set(accounts.values()) == set(manifest['team'])
+    unidentified = manifest.get('unidentifiedAccounts', {})
+    assert not (set(accounts) & set(unidentified)), 'Unconfirmed accounts must not be assigned to team members'
+    for identity in unidentified.values():
+        assert identity['identityStatus'] == 'unconfirmed'
+        assert identity['teamMembership'] == 'unconfirmed'
+        assert identity['countedAsConfirmedTeamAccount'] is False
+    contributions = manifest['forkContributions']
+    assert len(contributions) == 3
+    assert {record['pullRequest'] for record in contributions} == {12, 13, 14}
+    contribution_doc = (FINAL / 'team-contributions.md').read_text()
+    for record in contributions:
+        assert accounts[record['proposerAccount']] == record['person']
+        assert record['parentRepository'] == 'sayknow/M2-1'
+        assert record['targetBranch'] == 'canary'
+        assert record['forkUrl'] == 'https://github.com/' + record['repository']
+        assert record['pullRequestUrl'] == f"https://github.com/sayknow/M2-1/pull/{record['pullRequest']}"
+        assert record['forkUrl'] in contribution_doc
+        assert record['pullRequestUrl'] in contribution_doc
+        for commit in record['commits']:
+            author = commit['authorAccount']
+            assert author in accounts or author in unidentified
+            if author in unidentified:
+                assert commit['authorIdentityStatus'] == 'unconfirmed'
+            assert len(commit['sha']) == 40 and all(c in '0123456789abcdef' for c in commit['sha'])
+            assert commit['url'] == 'https://github.com/sayknow/M2-1/commit/' + commit['sha']
+            assert commit['url'] in contribution_doc
+    assert isinstance(manifest['submissionReady'], bool)
+    assert isinstance(manifest['pendingEvidence'], list)
+    if manifest['submissionReady']:
+        assert not manifest['pendingEvidence'], 'Evidence still pending'
+    else:
+        assert manifest['pendingEvidence'] or manifest.get('submissionReview', {}).get('remainingActions'), (
+            'Document the remaining final review or submission actions')
+    confirmation = manifest['teamContributionConfirmation']
+    assert set(confirmation['documentContributors']) == {'김재욱', '배창민', '윤준서'}
+    assert confirmation['demoVideoCreator'] == manifest['demoVideo']['creator'] == '윤준서'
+    reporting = manifest['feedbackReporting']
+    assert reporting['individualResponseAttachmentsRequiredByProject'] is False
+    assert reporting['minimumActualTargetUsersRequired'] >= 5
+    assert reporting['developerQACountedAsActualUsers'] is False
 
     # Evidence may contain public field names; raw session credentials must not be saved.
     def inspect(value):

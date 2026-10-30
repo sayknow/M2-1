@@ -158,7 +158,7 @@
 | 피드백 문서 수정 | Git 작성자 `daguri2963`, [`21865ef`](https://github.com/sayknow/M2-1/commit/21865efb6d2af037fdf39eaf59d4bd0c20bbf709) | `sayknow`가 [PR #13](https://github.com/sayknow/M2-1/pull/13) 병합 |
 | 역할 분담 문서 수정 | Git 작성자 `love4xox`, [`ff2d348`](https://github.com/sayknow/M2-1/commit/ff2d34822bbb2261668d56b9375e028eff7d27fb) | PR 제안 계정은 `woogie0403`, `sayknow`가 [PR #14](https://github.com/sayknow/M2-1/pull/14) 병합 |
 
-실명과 계정을 확인한 연결은 `sayknow=이승현`, `jojunsu98=조준수`다. 나머지 계정의 실명·소유 관계는 추가 확인 없이 임의로 팀원에게 연결하지 않는다. PR #14처럼 제안 계정과 커밋 작성자가 다른 경우 두 값을 그대로 보존한다. 담당 역할과 실제 수행 증빙은 [팀원 역할·기여 문서](final/team-contributions.md)에서 함께 확인한다.
+**2026-10-30 계정 연결 보완:** 사용자가 `sayknow=이승현`, `jojunsu98=조준수`, `etu9317cw=윤준서`, `daguri2963=배창민`, `woogie0403=김재욱`을 확인했다. PR #12는 윤준서, PR #13은 배창민, PR #14는 김재욱이 우리 저장소의 포크 `woogie0403/M2-1-final`에서 제출해 canary에 병합된 기여 기록이다. PR #14의 커밋 작성 계정은 `love4xox`(실명·팀 소속 미확인)이며 제안자·작성자·병합자를 구분한다. 이 계정 연결 보완은 위 고정 커밋 스냅샷의 개수·작성자·시각을 변경하지 않는다. 개인별 포크·커밋·PR 링크는 [팀원 역할·기여 문서](final/team-contributions.md)에서 확인한다.
 
 ## 6. 이 문서 관리 방법
 

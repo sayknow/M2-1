@@ -8,6 +8,8 @@ import hashlib
 import json
 import re
 import sqlite3
+import unicodedata
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
@@ -27,22 +29,114 @@ def literal_assignment(path, name):
     raise AssertionError(f'Missing literal {name}: {path}')
 
 
+def markdown_anchors(content):
+    """GitHub-style heading anchors, including repeated heading suffixes."""
+    anchors = set()
+    counts = {}
+    for line in content.splitlines():
+        match = re.match(r'^#{1,6}\s+(.+?)\s*#*$', line)
+        if not match:
+            continue
+        heading = re.sub(r'<[^>]+>', '', match.group(1)).lower().replace('`', '')
+        slug = ''.join(c for c in heading if c in '-_' or c.isspace()
+                       or unicodedata.category(c)[0] not in 'PS')
+        slug = re.sub(r'\s', '-', slug.strip())
+        count = counts.get(slug, 0)
+        counts[slug] = count + 1
+        anchors.add(slug + (f'-{count}' if count else ''))
+    return anchors
+
+
+class HtmlReferences(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.references = []
+        self.ids = set()
+        self.slide_count = 0
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        self.references.extend(attrs[key] for key in ('href', 'src') if attrs.get(key))
+        if attrs.get('id'):
+            self.ids.add(attrs['id'])
+        if tag == 'section' and 'slide' in attrs.get('class', '').split():
+            self.slide_count += 1
+
+
+def document_references(path):
+    content = path.read_text()
+    if path.suffix == '.html':
+        parser = HtmlReferences()
+        parser.feed(content)
+        return parser.references
+    return [m.group(1).strip().strip('<>')
+            for m in re.finditer(r'!?\[[^\]\n]*\]\(([^)\n]+)\)', content)]
+
+
+def local_reference(path, target):
+    target = target.strip().strip('<>')
+    parsed = urlsplit(target)
+    if parsed.scheme or parsed.netloc:
+        return None
+    resolved = (path.parent / unquote(parsed.path)).resolve() if parsed.path else path.resolve()
+    assert resolved.is_relative_to(ROOT), f'Outside project: {path.relative_to(ROOT)}: {target}'
+    assert resolved.exists(), f'Broken link: {path.relative_to(ROOT)}: {target}'
+    if parsed.fragment and resolved.suffix in {'.md', '.html'}:
+        if resolved.suffix == '.md':
+            anchors = markdown_anchors(resolved.read_text())
+        else:
+            parser = HtmlReferences()
+            parser.feed(resolved.read_text())
+            anchors = parser.ids
+        assert unquote(parsed.fragment) in anchors, f'Broken anchor: {path.relative_to(ROOT)}: {target}'
+    return resolved
+
+
 def main():
     manifest = read_json(FINAL / 'manifest.json')
+    guide = manifest['documentationGuide']
+    inventory = {'README.md', 'CONTRIBUTING.md', 'docs/presentation.html'} | {
+        str(p.relative_to(ROOT)) for p in (ROOT / 'docs').rglob('*.md')}
+    assert len(manifest['documents']) == len(set(manifest['documents'])), 'Duplicate document registration'
+    assert set(manifest['documents']) == inventory, 'Document inventory changed; register it in the guide and manifest'
+    index = ROOT / guide['index']
+    indexed = {p for target in document_references(index)
+               if (p := local_reference(index, target)) is not None}
+    for relative in inventory - {guide['index']}:
+        assert ROOT / relative in indexed, f'Document missing from common index: {relative}'
+    classified = (set(guide['canonicalByTopic'].values()) | set(guide['supportingDocuments'])
+                  | set(guide['historicalDocuments']) | set(guide['compatibilityDocuments'])
+                  | {guide['index'], manifest['presentation']['html']})
+    assert classified == inventory, 'Classify each document as current, supporting, historical or compatibility'
+    assert not set(guide['canonicalByTopic'].values()) & set(guide['historicalDocuments'])
+    assert guide['canonicalByTopic']['userFeedback'] == 'docs/final/user-feedback.md'
+    for relative in guide['historicalDocuments']:
+        assert (ROOT / relative).read_text().startswith('> **과거'), f'Missing historical notice: {relative}'
+    for old, current in guide['compatibilityDocuments'].items():
+        links = {p for target in document_references(ROOT / old)
+                 if (p := local_reference(ROOT / old, target)) is not None}
+        assert ROOT / current in links, f'Compatibility path must link to current document: {old}'
+    archived_feedback = ROOT / 'docs/archive/user-feedback-2026-10-24.md'
+    assert hashlib.sha256(archived_feedback.read_bytes()).hexdigest() == guide['archivedFeedbackSha256']
+    presentation = manifest['presentation']
+    for key in ('markdown', 'html', 'pdf'):
+        assert (ROOT / presentation[key]).is_file(), f'Missing presentation {key}'
+        expected = presentation['sha256'][key]
+        assert hashlib.sha256((ROOT / presentation[key]).read_bytes()).hexdigest() == expected, (
+            f'Presentation {key} changed; synchronize sources/PDF and record checked hashes')
+    assert (ROOT / presentation['pdf']).read_bytes().startswith(b'%PDF-')
+    slides = HtmlReferences()
+    slides.feed((ROOT / presentation['html']).read_text())
+    assert slides.slide_count == presentation['pages']
+    assert len(re.findall(r'^## \d+\.', (ROOT / presentation['markdown']).read_text(), re.M)) == presentation['pages']
     checked = 0
     for relative in manifest['documents']:
         path = ROOT / relative
         assert path.is_file(), f'Missing document: {relative}'
         content = path.read_text()
-        for match in re.finditer(r'!?\[[^\]\n]*\]\(([^)\n]+)\)', content):
-            target = match.group(1).strip().strip('<>')
-            if target.startswith('#') or urlsplit(target).scheme:
-                continue
-            target = unquote(target.split('#', 1)[0])
-            resolved = (path.parent / target).resolve()
-            assert resolved.is_relative_to(ROOT), f'Outside project: {relative}: {target}'
-            assert resolved.exists(), f'Broken link: {relative}: {target}'
-            checked += 1
+        for target in document_references(path):
+            if local_reference(path, target) is not None:
+                checked += 1
         # Catch private values, not references to environment variable names.
         assert not re.search(r'(?i)(?:sk-[A-Za-z0-9_-]{20,}|AIza[A-Za-z0-9_-]{25,}|gh[pousr]_[A-Za-z0-9]{20,})', content), f'Possible secret: {relative}'
 
@@ -109,8 +203,8 @@ def main():
     assert release['commit'] == local['baselineCommit'] == manifest['baselineCommit']
     assert release['passed'] and all(c['passed'] for c in local['checks'])
     assert len(manifest['team']) == 5 and len(set(manifest['team'])) == 5
-    assert manifest['confirmedAccount'] == {'sayknow': '이승현'}
-    assert manifest['submissionReady'] is False and len(manifest['pendingEvidence']) == 3
+    assert manifest['confirmedAccount'] == {'sayknow': '이승현', 'jojunsu98': '조준수'}
+    assert manifest['submissionReady'] is False and manifest['pendingEvidence']
 
     # Evidence may contain public field names; raw session credentials must not be saved.
     def inspect(value):
@@ -126,6 +220,9 @@ def main():
         inspect(read_json(path))
     print(json.dumps({'technicalDocumentationChecksPassed': True,
                       'documents': len(manifest['documents']), 'localLinks': checked,
+                      'commonIndexCoversAllDocuments': True,
+                      'historicalDocuments': len(guide['historicalDocuments']),
+                      'presentationSourcePages': slides.slide_count,
                       'runtimeSourceHashes': len(manifest['sourceSha256']),
                       'submissionReady': manifest['submissionReady'],
                       'pendingEvidence': manifest['pendingEvidence']}, ensure_ascii=False, indent=2))

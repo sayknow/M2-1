@@ -60,7 +60,7 @@ img.shot { width: 100%; border: 1px solid #ddd6cc; border-radius: 2mm; backgroun
   <div class="meta">
     서비스 <b>https://vitastep-guide.onrender.com/</b> &nbsp;·&nbsp; 저장소 <b>github.com/sayknow/M2-1</b><br>
     이승현(팀장·주 개발) · 조준수(부 개발 - UX 개선 및 최종 사용성 및 디버그) · 김재욱(문서작성 - 기획서(역할분담), 기능요구서, README) · 배창민(문서작성 - 피드백 자료 수집 및 작성) · 윤준서(문서작성 - 발표 자료(pdf))<br>
-    2026-10-17 ~ 10-24 &nbsp;·&nbsp; AI Agent + RAG &nbsp;·&nbsp; 코디세이 COPA gpt-5.4
+    자료 기준 2026-10-24 · 문서 정리 2026-10-29 &nbsp;·&nbsp; AI Agent + RAG &nbsp;·&nbsp; 코디세이 COPA gpt-5.4
   </div>
 </section>
 
@@ -113,10 +113,13 @@ img.shot { width: 100%; border: 1px solid #ddd6cc; border-radius: 2mm; backgroun
   <h1>홈에서 네 갈래, 끝은 "출처가 붙은 결과"</h1>
   <div class="cols c12">
     <div>
-<pre class="flow">홈 ─┬─ 추천받기 → 동의 3개 → 설문 5단계 → 후보 최대 3개(이유·출처) ─┬─ 제품 상세
-    ├─ 제품 찾기 → 검색·필터 → 제품 상세(표시 전체·출처·사진)          ├─ 두 제품 비교
-    ├─ 비교하기 → 두 제품 담기 → 비교표(+ AI 차이 해설)                 └─ AI에게 물어보기
-    └─ AI에게 물어보기 → 동의 → 시작 질문 6개 또는 직접 입력</pre>
+<pre class="flow" style="font-size:9pt">홈
+ ├ 추천받기: 동의 → 설문 → 후보·근거
+ ├ 제품 찾기: 검색·필터 → 상세·출처
+ ├ 비교하기: 두 제품 → 비교표·AI 해설
+ └ AI 대화: 동의 → 일반 6개 / 제품 4개 질문
+
+후보·제품 상세 → 비교·제품 AI 대화</pre>
       <h2 style="margin-top:4mm">설문 5단계</h2>
       <ol class="small">
         <li><b>관심 분야</b>(복수): 일상의 활력 · 뼈·근육 건강 · 장 건강 · 혈당 관리 · 다이어트</li>
@@ -128,9 +131,9 @@ img.shot { width: 100%; border: 1px solid #ddd6cc; border-radius: 2mm; backgroun
       <p class="small">병명·약 이름·검사 수치는 묻지 않는다. 제품 찾기·상세·비교표는 동의 없이, 추천·AI 대화·AI 비교 해설은 동의(성인·정보 처리·AI 전송) 뒤.</p>
     </div>
     <div>
-      <img class="shot" src="screenshots/vitastep-home.png" alt="홈">
-      <p class="cap">홈 — 추천받기 · 비교하기 · AI에게 물어보기 · 제품 찾기. "표시를 확인한 제품 정보 87개"</p>
-      <img class="shot" style="margin-top:3mm; max-height:52mm; object-fit:cover; object-position:top" src="final/evidence/survey-five-goals.jpg" alt="설문 1단계">
+      <img class="shot" style="max-height:52mm; object-fit:contain" src="screenshots/vitastep-home.png" alt="홈">
+      <p class="cap">당시 홈 화면 — 추천·비교·대화·제품 찾기. 보존된 화면이며 후속 다크 모드와 구분한다.</p>
+      <img class="shot" style="margin-top:3mm; max-height:45mm; object-fit:contain" src="final/evidence/survey-five-goals.jpg" alt="설문 1단계">
       <p class="cap">설문 1단계 관심 분야 — 입력은 서버 처리, AI에는 필요한 정보만 전송</p>
     </div>
   </div>
@@ -140,7 +143,7 @@ img.shot { width: 100%; border: 1px solid #ddd6cc; border-radius: 2mm; backgroun
 <!-- 5 기능과 데이터 -->
 <section class="slide">
   <p class="eyebrow">4 · 기능과 데이터</p>
-  <h1>Must 8개, 전부 운영 서비스에서 동작</h1>
+  <h1>Must 8개, 대표 사례와 검사 범위를 명시</h1>
   <div class="cols c21">
     <div>
       <table>
@@ -182,16 +185,15 @@ img.shot { width: 100%; border: 1px solid #ddd6cc; border-radius: 2mm; backgroun
         <tr><td>프런트</td><td>React 19 · TypeScript · Vite</td><td>폰으로 쓰는 단일 화면. 정적 빌드 → 무료 호스팅</td></tr>
         <tr><td>서버</td><td>Python 3.13 · FastAPI · Pydantic</td><td>수집·검수 스크립트와 같은 언어. 설문 값 서버 검증, 비동기 AI 호출</td></tr>
         <tr><td>데이터</td><td>SQLite 읽기 전용 + JSON</td><td>88개 규모라 DB 서버 불필요. 파일째 Git·Docker 이미지에</td></tr>
-        <tr><td>AI</td><td>코디세이 COPA <code>gpt-5.4</code> · OpenAI SDK</td><td>과정 제공 API. 함수 호출·구조화 출력</td></tr>
+        <tr><td>AI</td><td>코디세이 COPA <code>gpt-5.4</code> · OpenAI SDK</td><td>과정 제공 호환 API. 함수 호출·서버 JSON 검증</td></tr>
         <tr><td>배포</td><td>Render Static Site + Docker Web Service</td><td><code>production</code> 병합 → 자동 배포</td></tr>
         <tr><td>품질</td><td>pytest 171 · Node 테스트 23 · CI 4개</td><td>AI 키 없이 PR마다</td></tr>
       </table>
       <p class="small" style="margin-top:3mm"><b>브랜치</b> <code>main</code>(프로토타입 보존) → <b><code>canary → dev → production</code></b>. 개발은 canary, CI 통과 후 dev, 운영 확인 뒤 production. dev·production은 PR + CI 4개 필수, 강제 push·삭제 차단(GitHub Rulesets 3개).</p>
     </div>
     <div>
-<pre>[브라우저 React SPA]
-        │ HTTPS
-        ▼
+<pre style="font-size:8.5pt">[브라우저 React SPA]
+        ↕ HTTPS·JSON 요청 / 응답
 [FastAPI · Render Docker]
   policy.py      규칙 추천 · 성분 중복
   repository.py  SQLite 검색 (RAG)
@@ -200,13 +202,21 @@ img.shot { width: 100%; border: 1px solid #ddd6cc; border-radius: 2mm; backgroun
   agent.py       도구 선택 → 검색
                  → 인용 검증
   privacy.py     건강 개인정보 차단
-        │ 걸러진 질문 + 검색 결과만
-        ▼
-[코디세이 COPA gpt-5.4]</pre>
-      <p class="small" style="margin-top:3mm">설문·대화 원문은 서버 DB에 저장하지 않고 임시 메모리(30분)에만. API 키는 서버 환경변수만, <code>copa.codyssey.kr</code> 외 호스트 거부.</p>
+        ↕ 최소 입력·근거·도구 결과
+          / 도구 호출 요청·생성 답변
+[코디세이 COPA gpt-5.4]
+
+[서버 내부 정책·조회·도구]
+        ↕ 조회 / 결과
+[읽기 전용 SQLite·JSON]
+
+[Agent] ↔ [허용된 내부 도구]
+        호출 / 실행 결과</pre>
+      <p class="small" style="margin-top:2mm">↔ 요청·호출과 결과 반환. DB·JSON은 서버 내부 읽기 전용이며 GPT가 직접 접근하지 않는다. 도구 실행·답변 검증은 서버가 담당한다. 수집 → 검수 → DB 구축은 작업 순서다.</p>
+      <p class="small" style="margin-top:2mm">설문·대화 원문은 DB에 저장하지 않는다. API 키는 서버 환경변수만, <code>copa.codyssey.kr</code> 외 호스트 거부.</p>
     </div>
   </div>
-  <div class="foot"><span>영양제 첫걸음 · 2026-10-24</span><span>6 / 12</span></div>
+  <div class="foot"><span>영양제 첫걸음 · 2026-10-24 · 도식 수정 2026-10-29</span><span>6 / 12</span></div>
 </section>
 
 <!-- 7 AI ① -->
@@ -324,41 +334,36 @@ img.shot { width: 100%; border: 1px solid #ddd6cc; border-radius: 2mm; backgroun
 <!-- 11 피드백 -->
 <section class="slide">
   <p class="eyebrow">10 · 사용자 피드백과 개선</p>
-  <h1>써 보고 고친 5건, 실사용자 5명이 남긴 5건</h1>
-  <div class="cols c2">
+  <h1>5개 불편을 고치고, 확인한 근거를 연결한다</h1>
+  <div class="cols c21">
     <div>
-      <h2>팀 내부 점검(10-21~23 배포본)에서 고친 5건</h2>
+      <h2>팀이 선정한 개선 주제와 실제 변경</h2>
       <table style="font-size:9pt">
-        <tr><th style="width:19%">건</th><th style="width:31%">발견</th><th>개선 전 → 후</th><th style="width:15%">반영</th></tr>
-        <tr><td>F01 주소</td><td><code>m2-1-itfc</code>로는 무슨 서비스인지 모름</td><td>→ <code>vitastep-guide</code>, CORS 갱신</td><td><code>1e44b76</code></td></tr>
-        <tr><td>F02 질문 범위</td><td>상품 표시 밖 일반 질문에 답 못 함</td><td>지식 카드 35장 + 지식 검색 도구</td><td><code>b1185bf</code></td></tr>
-        <tr><td>F03 첫 질문</td><td>"함량과 기준량의 차이" → 503</td><td>표시 읽기 안내 경로, 근거 없음은 200 안내</td><td><code>c8fa914</code></td></tr>
-        <tr><td>F04 활력 추천</td><td>마그네슘 등 목적과 먼 후보</td><td>목적 중심 분류 v2</td><td><code>b75f847</code></td></tr>
-        <tr><td>F05 포장 변형</td><td>규격만 다른 제품이 나란히</td><td>같은 제품군은 대표 1개만</td><td><code>b75f847</code></td></tr>
+        <tr><th style="width:18%">항목</th><th style="width:32%">불편</th><th>개선·사용자가 기대할 변화</th></tr>
+        <tr><td>F01 주소</td><td>주소만으로 서비스를 알기 어려움</td><td><code>vitastep-guide</code>로 변경. 다시 찾기·공유 시 식별하기 쉬움 (<code>1e44b76</code>)</td></tr>
+        <tr><td>F02 질문 범위</td><td>일반 영양 질문에 답하기 어려움</td><td>공식 지식 카드 35장·지식 도구. 제품 선택 전 일반 질문 가능 (<code>b1185bf</code>)</td></tr>
+        <tr><td>F03 첫 질문</td><td>‘함량과 기준량’에서 503</td><td>표시 읽기 안내 검색·인용. 첫 대화를 이어 감 (<code>c8fa914</code>, M03 3/3)</td></tr>
+        <tr><td>F04 활력 추천</td><td>관심과 후보 이유의 연결이 약함</td><td>B 중심 직접 목적과 관련 성분 분리. 이유 이해를 도움 (<code>b75f847</code>, 대표 M04 2/3)</td></tr>
+        <tr><td>F05 비슷한 후보</td><td>포장 변형을 반복해서 읽음</td><td>표시·제형·섭취법이 같은 제품군 대표 1개. 후보 차이에 집중 (<code>b75f847</code>)</td></tr>
       </table>
-      <p class="small" style="margin-top:2mm">각 건의 확인 방법은 운영 서비스에서 그대로 따라 할 수 있다(피드백 기록 4절).</p>
     </div>
     <div>
-      <h2>실사용자 5명 피드백 (10-24)</h2>
-      <table style="font-size:9pt">
-        <tr><th style="width:21%">가명</th><th style="width:44%">요청</th><th>상태 10-24</th></tr>
-        <tr><td>T1 20대·처음</td><td>설문 시작 전 소요 시간 안내</td><td>검토 중 — 시작 화면 "5단계 · 약 3분"</td></tr>
-        <tr><td>T2 30대·처음</td><td>87개 스크롤 → 필터·가격순 정렬</td><td>검토 중 — 가격순·제형 먼저</td></tr>
-        <tr><td>T3 50대·경험</td><td>"표시 검수"가 누가 한 것인지 한 줄</td><td>검토 중 — 상세의 "자체 검수" 설명을 목록에도</td></tr>
-        <tr><td>T4 30대·경험</td><td>"관찰가" 용어, 섭취 일수·하루 비용</td><td>검토 중 — 용어는 바로, 일수는 규칙 뒤</td></tr>
-        <tr><td>T5 40대·처음</td><td>동의 화면 분량, 요약 먼저</td><td>검토 중 — 글은 덜지 않고 순서만</td></tr>
-      </table>
-      <p class="small" style="margin-top:2mm">팀원 제외 성인 5명이 운영 주소만 받아 혼자 써 봄. 좋았던 점: 서비스 뜻이 바로 보임 · 성분·가격 한눈에 · 공식 정보라 믿음 · 용량 비교 · 안내가 상세해 신뢰.</p>
-      <p class="note">전부 10-24 개발 담당에게 전달. 반영 커밋이 운영에 배포되면 같은 테스터에게 재확인한다. 하지 않은 반영은 적지 않았다.</p>
+      <h2>피드백의 확인 범위</h2>
+      <div class="card">
+        <p><b>팀 제공 날짜</b><br>10/22에 2건 · 10/23에 3건</p>
+        <p class="small">요구 문구는 팀이 정리한 요약이며 참여자 발언의 직접 인용이 아니다. 현재 기준은 <code>docs/final/user-feedback.md</code>다.</p>
+        <p class="small">실제 5명 참여·익명화 응답 원본·개선 후 재평가는 추가 확인 대상이다. 이전 작성본의 10/24 연령별 응답 주장은 현재 증빙에 합산하지 않는다.</p>
+      </div>
+      <p class="note"><b>5개 개선 항목 ≠ 5명 참여 증거.</b><br>기대하는 편의성 효과를 측정된 만족도나 시간 단축으로 표현하지 않는다. 변경 근거와 개발자 QA는 실제 사용자 평가와 구분한다.</p>
     </div>
   </div>
-  <div class="foot"><span>영양제 첫걸음 · 2026-10-24</span><span>11 / 12</span></div>
+  <div class="foot"><span>영양제 첫걸음 · 기준 2026-10-24 · 문서 정리 2026-10-29</span><span>11 / 12</span></div>
 </section>
 
 <!-- 12 팀 -->
 <section class="slide">
   <p class="eyebrow">11 · 팀 · 협업 · 다음</p>
-  <h1>다섯 명, 일주일, 그리고 남은 것</h1>
+  <h1>역할·실제 기여·남은 증빙을 구분한다</h1>
   <div class="cols c2">
     <div>
       <table>
@@ -369,25 +374,24 @@ img.shot { width: 100%; border: 1px solid #ddd6cc; border-radius: 2mm; backgroun
         <tr><td>배창민</td><td>문서작성: 피드백 자료 수집 및 작성</td></tr>
         <tr><td>윤준서</td><td>문서작성: 발표 자료(pdf)</td></tr>
       </table>
-      <p class="small" style="margin-top:3mm"><b>협업</b>: 기능 개발은 <code>canary</code>, CI 통과 후 <code>dev</code>, 운영 확인 뒤 <code>production</code>. 문서도 같은 PR 흐름. 기여 요약은 각자 본인이 README 역할 표에 적는다.</p>
+      <p class="small" style="margin-top:3mm"><b>협업</b>: canary 로컬 검증·CI → dev 통합 → production 승격. 확인된 계정은 <code>sayknow=이승현</code>, <code>jojunsu98=조준수</code>. PR #15 다크 모드 작성과 병합을 구분한다. 나머지 계정의 실명을 임의 배정하지 않는다.</p>
     </div>
     <div>
-      <h2>일정</h2>
-      <table style="font-size:9.5pt">
-        <tr><td style="width:18%">10-17</td><td>팀 회의: 주제·역할·Agent+RAG 방향</td></tr>
-        <tr><td>10-19</td><td>설계 2판 · Streamlit 프로토타입</td></tr>
-        <tr><td>10-20</td><td>제품 88개 수집·전수 검수 · React 프로토타입</td></tr>
-        <tr><td>10-21</td><td>Gemini 백엔드 · Render 첫 배포 · 첫 질문 오류 수정</td></tr>
-        <tr><td>10-22</td><td>주소 변경 · 멘토링</td></tr>
-        <tr><td>10-23</td><td>브랜치·CI · COPA 전환 · 분류 v2 · 릴리스</td></tr>
-        <tr><td>10-24</td><td>설문 선택지 단순화 · 제출 문서 · 실사용자 5명 피드백 수집</td></tr>
+      <h2>개발 경과와 문서 입구</h2>
+      <table style="font-size:9pt">
+        <tr><td style="width:18%">10/20</td><td>검수 DB·React 프로토타입</td></tr>
+        <tr><td>10/21</td><td>서버·첫 배포·첫 질문·상담 범위 개선</td></tr>
+        <tr><td>10/22</td><td>서비스 주소 변경</td></tr>
+        <tr><td>10/23</td><td>COPA·브랜치·CI·추천·비교</td></tr>
+        <tr><td>10/24</td><td>성분 설명·성인 기준·설문·문서</td></tr>
+        <tr><td>10/29</td><td>canary 다크 모드·문서 연결 정리</td></tr>
       </table>
-      <h2 style="margin-top:3mm">다음</h2>
-      <p class="small">피드백 5건 반영 → 같은 테스터 재확인 → 각자 기여 요약 → 제출(공식 마감 11-25)</p>
-      <p class="small"><b>문서</b> 기획서 <code>docs/project-plan.md</code> · 명세서 <code>docs/functional-requirements.md</code> · 피드백 <code>docs/user-feedback.md</code> · <code>README.md</code></p>
+      <p class="small" style="margin-top:2mm"><b>기여·이력</b>: <code>docs/final/team-contributions.md</code> · <code>docs/commit-history.md</code>. 코드 작성과 역할 배정을 구분한다.</p>
+      <p class="note"><b>남은 확인</b>: 실제 5명 참여·익명화 원본, 전원 본인 작성 기여 요약·대표 링크, 사용자 재확인, 브랜치 승격·제출.</p>
+      <p class="small"><b>문서 입구</b>: <a href="https://github.com/sayknow/M2-1/blob/canary/docs/final/README.md">docs/final/README.md</a><br>현재 안내 → 기준 문서 → 상세 증빙 → 과거 기록</p>
     </div>
   </div>
-  <div class="foot"><span>영양제 첫걸음 · 2026-10-24 · https://vitastep-guide.onrender.com/ · github.com/sayknow/M2-1</span><span>12 / 12</span></div>
+  <div class="foot"><span>영양제 첫걸음 · 문서 정리 2026-10-29 · https://vitastep-guide.onrender.com/ · github.com/sayknow/M2-1</span><span>12 / 12</span></div>
 </section>
 
 </body>

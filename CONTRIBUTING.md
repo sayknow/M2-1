@@ -1,5 +1,7 @@
 # 브랜치와 참여 방법
 
+[문서 전체 목차](docs/final/README.md) · [서비스 소개·실행](README.md) · [보안·운영](docs/final/security-and-operations.md)
+
 이 저장소는 소유자 `sayknow`가 통합과 운영 배포를 관리하고, 팀원이 `canary`에서 개발에 참여한다. 별도 시험 서버는 운영하지 않는다.
 
 ## 브랜치
@@ -60,4 +62,4 @@ Render의 새·기존 홈페이지와 백엔드는 `production`에 연결한다.
 
 운영 장애의 긴급 수정도 `production` 기준 코드를 로컬에서 확인하고 `canary → dev → production`으로 반영한다. 안정화 변경은 `dev`와 `canary`에도 반영한다. 급한 복구는 소유자가 Render에서 이전 정상 배포를 선택하고 자동 배포 상태를 확인한 뒤, 원인 수정이나 revert를 같은 PR 흐름으로 기록한다. 삭제·강제 푸시로 기록을 되돌리지 않는다.
 
-기존 [README 실행·검증 방법](README.md), [배포 설정](docs/deployment.md)을 함께 확인한다. 비밀키는 서버 환경변수에만 두고 실제 사용자 건강정보를 PR이나 검사 입력으로 올리지 않는다.
+현재 안내는 [README 실행·검증 방법](README.md), [보안·운영](docs/final/security-and-operations.md), [문서 전체 목차](docs/final/README.md)를 확인한다. [최초 배포 기록](docs/deployment.md)은 당시 설정 이력으로 보존한다. 문서를 수정하면 `python3 scripts/validate_final_docs.py`로 목록·링크·발표 파일의 동기화 상태를 확인한다. 비밀키는 서버 환경변수에만 두고 실제 사용자 건강정보를 PR이나 검사 입력으로 올리지 않는다.

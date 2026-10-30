@@ -1,5 +1,5 @@
 {
-  "documentDate": "2026-10-24",
+  "documentDate": "2026-10-29",
   "baselineCommit": "0bc17dca34f3ec6479549248798e76bfcb962064",
   "homepage": "https://vitastep-guide.onrender.com/",
   "backend": "https://m2-1-api.onrender.com",
@@ -49,18 +49,32 @@
     "윤준서"
   ],
   "confirmedAccount": {
-    "sayknow": "이승현"
+    "sayknow": "이승현",
+    "jojunsu98": "조준수"
   },
   "submissionReady": false,
   "pendingEvidence": [
     "five actual target users with target eligibility and anonymized originals; test dates supplied by team",
-    "self-written contributions and individual evidence for all five members",
-    "presentation PDF"
+    "self-written contributions and individual evidence for all five members"
   ],
   "documents": [
     "README.md",
-    "docs/project-plan.md",
-    "docs/functional-requirements.md",
+    "CONTRIBUTING.md",
+    "docs/adult-intake-reference.md",
+    "docs/ai-counselor.md",
+    "docs/archive/project-plan-initial.md",
+    "docs/archive/user-feedback-2026-10-24.md",
+    "docs/backend-api.md",
+    "docs/backend-test-results.md",
+    "docs/catalog-research.md",
+    "docs/chat-label-reading-fix.md",
+    "docs/codyssey-gpt.md",
+    "docs/commit-history.md",
+    "docs/comparison-explanation.md",
+    "docs/copa-local-integration.md",
+    "docs/data-sources.md",
+    "docs/data-validation.md",
+    "docs/deployment.md",
     "docs/final/README.md",
     "docs/final/ai-design.md",
     "docs/final/architecture.md",
@@ -70,7 +84,22 @@
     "docs/final/team-contributions.md",
     "docs/final/test-results.md",
     "docs/final/user-feedback.md",
-    "docs/adult-intake-reference.md"
+    "docs/frontend-test-results.md",
+    "docs/functional-requirements.md",
+    "docs/presentation.md",
+    "docs/product-collection-report.md",
+    "docs/product-database.md",
+    "docs/product-label-review.md",
+    "docs/product-thumbnails.md",
+    "docs/project-plan.md",
+    "docs/recommendation-classification-v2.md",
+    "docs/recommendation-policy-v2.md",
+    "docs/recommendation-policy.md",
+    "docs/recommendation-v2-test-results.md",
+    "docs/ui-design.md",
+    "docs/user-feedback.md",
+    "docs/version-control.md",
+    "docs/presentation.html"
   ],
   "sourceSha256": {
     "backend/main.py": "a4a7366940a71e182897b4874719762e8874e68d9c5c55f661486ed053766946",
@@ -105,8 +134,8 @@
     "data/references/kdri-2025-summary-ko.pdf": "605ff8431ea7b6c465165bb5335aba580dcd4d56ba13a69583e62d163a7cc0c2"
   },
   "sourceSnapshot": {
-    "baseCommit": "4eedc4e329028f560857b241d5290d1fdd07e88b",
-    "status": "canary survey follow-up after product chat changeset; production deployment pending",
+    "baseCommit": "ab3e8bfd175ebe0e3c2669d8cd65755164157d5a",
+    "status": "canary ab3e8bf plus local documentation organization; branch promotion and live deployment are separate",
     "changesAfterBaseline": [
       "frontend/src/App.tsx",
       "frontend/src/services.ts",
@@ -118,9 +147,10 @@
       "frontend/src/adult-intake.ts",
       "frontend/src/data/adult-intake-references.json",
       "data/references/kdri-2025-summary-ko.pdf",
-      "frontend/src/domain.ts"
+      "frontend/src/domain.ts",
+      "frontend/index.html"
     ],
-    "reason": "Local canary product overview and starter follow-up; quantities from reviewed DB, adult RNI/AI comparison calculated in-browser from verified 2025 Korean reference tables, short AI prose and collapsed labels. Original API evidence baseline remains separate.",
+    "reason": "Current code hashes include product chat, official adult RNI/AI ratios, survey simplification and PR #15 dark mode. Original API evidence baseline remains 0bc17dc.",
     "evidence": [
       "docs/final/evidence/product-context-prompts-local.json",
       "docs/final/evidence/product-nutrition-overview-local.json",
@@ -133,5 +163,83 @@
     "groups": 10,
     "values": 250,
     "sourceSha256": "605ff8431ea7b6c465165bb5335aba580dcd4d56ba13a69583e62d163a7cc0c2"
+  },
+  "evidenceDate": "2026-10-24",
+  "documentationGuide": {
+    "index": "docs/final/README.md",
+    "canonicalByTopic": {
+      "serviceAndExecution": "README.md",
+      "planning": "docs/project-plan.md",
+      "functionalRequirements": "docs/functional-requirements.md",
+      "architecture": "docs/final/architecture.md",
+      "aiDesign": "docs/final/ai-design.md",
+      "recommendationPolicy": "docs/recommendation-policy-v2.md",
+      "adultIntakeReference": "docs/adult-intake-reference.md",
+      "productDatabase": "docs/product-database.md",
+      "userFeedback": "docs/final/user-feedback.md",
+      "teamContributions": "docs/final/team-contributions.md",
+      "testResults": "docs/final/test-results.md",
+      "progress": "docs/final/progress.md",
+      "commitHistory": "docs/commit-history.md",
+      "securityAndOperations": "docs/final/security-and-operations.md",
+      "contributing": "CONTRIBUTING.md",
+      "presentationContent": "docs/presentation.md"
+    },
+    "supportingDocuments": [
+      "docs/product-label-review.md",
+      "docs/product-collection-report.md",
+      "docs/product-thumbnails.md",
+      "docs/comparison-explanation.md",
+      "docs/final/presentation-outline.md"
+    ],
+    "historicalDocuments": [
+      "docs/ai-counselor.md",
+      "docs/backend-api.md",
+      "docs/backend-test-results.md",
+      "docs/catalog-research.md",
+      "docs/chat-label-reading-fix.md",
+      "docs/codyssey-gpt.md",
+      "docs/copa-local-integration.md",
+      "docs/data-sources.md",
+      "docs/data-validation.md",
+      "docs/deployment.md",
+      "docs/frontend-test-results.md",
+      "docs/recommendation-classification-v2.md",
+      "docs/recommendation-policy.md",
+      "docs/recommendation-v2-test-results.md",
+      "docs/ui-design.md",
+      "docs/version-control.md",
+      "docs/archive/project-plan-initial.md",
+      "docs/archive/user-feedback-2026-10-24.md"
+    ],
+    "compatibilityDocuments": {
+      "docs/user-feedback.md": "docs/final/user-feedback.md"
+    },
+    "archivedFeedbackSha256": "06445f724b4672b1c6476b1c4e90fc87fc82a17225fe564e2663453ce0558231"
+  },
+  "presentation": {
+    "markdown": "docs/presentation.md",
+    "html": "docs/presentation.html",
+    "pdf": "docs/presentation.pdf",
+    "pages": 12,
+    "synchronizedOn": "2026-10-29",
+    "scope": "Reviewed summary; source dates and unverified user/contribution evidence stay explicit.",
+    "sha256": {
+      "markdown": "afe511c96ed7d5d65d610029eb94494326fa8de99a61e652e24dbb5bd0fd130c",
+      "html": "e4f6f38b4dee7b8c3e4d91d26085e7a40a07d3f476426430bd9027bdf64144f7",
+      "pdf": "6266cd89f0340c7e444c5a709c2b29e52aa7a1840201c582b75714bcb9459dea"
+    }
+  },
+  "demoVideo": {
+    "url": "https://github.com/user-attachments/assets/e1b11032-857d-4f4f-adaf-324229cd083b",
+    "attachedOn": "2026-10-30",
+    "originalFilename": "시연영상_v1.mp4",
+    "bytes": 8550582,
+    "durationSeconds": 172.2,
+    "container": "mp4",
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "sha256": "bc79096fd0dcbc0f727cf759ffdc790cf99d165f592a5b09ae0af26b48a5116e",
+    "readmeSection": "README.md#시연-영상"
   }
 }

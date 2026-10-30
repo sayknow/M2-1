@@ -1,0 +1,120 @@
+{
+  "date": "2026-10-29",
+  "scope": "Local documentation organization; no new live API, AI or user tests.",
+  "baselineCanaryCommit": "ab3e8bfd175ebe0e3c2669d8cd65755164157d5a",
+  "runtimeChanged": false,
+  "documentChecks": {
+    "technicalDocumentationChecksPassed": true,
+    "documents": 42,
+    "localLinks": 399,
+    "commonIndexCoversAllDocuments": true,
+    "historicalDocuments": 18,
+    "presentationSourcePages": 12,
+    "runtimeSourceHashes": 30,
+    "submissionReady": false,
+    "pendingEvidence": [
+      "five actual target users with target eligibility and anonymized originals; test dates supplied by team",
+      "self-written contributions and individual evidence for all five members"
+    ]
+  },
+  "pdf": {
+    "pages": 12,
+    "layout": {
+      "pages": [
+        {
+          "page": 1,
+          "contentFits": true,
+          "bad": [],
+          "preOverflow": false
+        },
+        {
+          "page": 2,
+          "contentFits": true,
+          "bad": [],
+          "preOverflow": false
+        },
+        {
+          "page": 3,
+          "contentFits": true,
+          "bad": [],
+          "preOverflow": false
+        },
+        {
+          "page": 4,
+          "contentFits": true,
+          "bad": [],
+          "preOverflow": false
+        },
+        {
+          "page": 5,
+          "contentFits": true,
+          "bad": [],
+          "preOverflow": false
+        },
+        {
+          "page": 6,
+          "contentFits": true,
+          "bad": [],
+          "preOverflow": false
+        },
+        {
+          "page": 7,
+          "contentFits": true,
+          "bad": [],
+          "preOverflow": false
+        },
+        {
+          "page": 8,
+          "contentFits": true,
+          "bad": [],
+          "preOverflow": false
+        },
+        {
+          "page": 9,
+          "contentFits": true,
+          "bad": [],
+          "preOverflow": false
+        },
+        {
+          "page": 10,
+          "contentFits": true,
+          "bad": [],
+          "preOverflow": false
+        },
+        {
+          "page": 11,
+          "contentFits": true,
+          "bad": [],
+          "preOverflow": false
+        },
+        {
+          "page": 12,
+          "contentFits": true,
+          "bad": [],
+          "preOverflow": false
+        }
+      ],
+      "missingImages": []
+    },
+    "visualReview": "All pages rendered; contact sheet and pages 4, 11, 12 inspected.",
+    "feedbackAndContributionTextChecksPassed": true,
+    "sourceAndOutputSha256": {
+      "markdown": "afe511c96ed7d5d65d610029eb94494326fa8de99a61e652e24dbb5bd0fd130c",
+      "html": "e4f6f38b4dee7b8c3e4d91d26085e7a40a07d3f476426430bd9027bdf64144f7",
+      "pdf": "6266cd89f0340c7e444c5a709c2b29e52aa7a1840201c582b75714bcb9459dea"
+    }
+  },
+  "submissionReady": false,
+  "pendingEvidence": [
+    "five actual target users with target eligibility and anonymized originals; test dates supplied by team",
+    "self-written contributions and individual evidence for all five members"
+  ],
+  "validatorBoundaryChecks": {
+    "validSelfAnchor": true,
+    "missingFileRejected": true,
+    "missingSelfAnchorRejected": true,
+    "missingTargetAnchorRejected": true,
+    "duplicateHeadingsSupported": true
+  },
+  "diffWhitespaceCheckPassed": true
+}

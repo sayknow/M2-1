@@ -1,5 +1,7 @@
 # 두 제품 AI 비교 해설
 
+[문서 전체 목차](final/README.md) · [서비스 소개·실행](../README.md)
+
 2026-10-23 production 0bc17dc 운영 반영. [최종 AI 설계](final/ai-design.md)·[운영 검증](final/test-results.md)을 함께 확인한다. 기존 두 제품 표시정보 비교(M07)에 덧붙이는 선택 기능이다. Must는 기존 8개를 유지한다.
 
 ## 사용자 흐름

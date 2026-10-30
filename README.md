@@ -1,8 +1,18 @@
 # 영양제 첫걸음
 
+**[문서 전체 목차](docs/final/README.md)** · [서비스](https://vitastep-guide.onrender.com/) · [발표 PDF](docs/presentation.pdf)
+
 다이소 영양제를 처음 고르는 성인을 위한 **설문 추천 · 두 제품 비교 · 출처 있는 AI 상담** 웹 서비스.
 
-**[서비스 열기](https://vitastep-guide.onrender.com/)** · [기획서](docs/project-plan.md) · [기능 요구 명세서](docs/functional-requirements.md) · [피드백 기록](docs/user-feedback.md) · [발표 자료](docs/presentation.pdf)
+## 시연 영상
+
+**2분 52초 · 시연영상 v1** — 서비스의 주요 이용 흐름을 영상으로 먼저 확인하세요.
+
+https://github.com/user-attachments/assets/e1b11032-857d-4f4f-adaf-324229cd083b
+
+재생 화면이 보이지 않으면 [시연 영상 직접 열기](https://github.com/user-attachments/assets/e1b11032-857d-4f4f-adaf-324229cd083b)를 이용하세요.
+
+처음 읽는다면 **문서 전체 목차 → 기획서 → 기능 요구 명세서 → 아키텍처·AI 설계** 순서로 확인하세요. 피드백·기여·검증·발표 자료와 과거 기록도 같은 목차에서 찾을 수 있습니다. 개발 변경은 [커밋·PR 이력](docs/commit-history.md)에서 확인합니다.
 
 ![홈 화면](docs/screenshots/vitastep-home.png)
 
@@ -11,6 +21,7 @@
 ## 목차
 
 - [영양제 첫걸음](#영양제-첫걸음)
+  - [시연 영상](#시연-영상)
   - [목차](#목차)
   - [1. 무엇을 하는 앱인가](#1-무엇을-하는-앱인가)
   - [2. 왜 만들었나](#2-왜-만들었나)
@@ -54,21 +65,25 @@
 | 프런트 | React 19 · TypeScript · Vite | 매장에서 폰으로 쓰는 단일 화면. 정적 빌드라 무료 호스팅 |
 | 서버 | Python 3.13 · FastAPI · Pydantic | 수집·검수 스크립트가 Python이라 같은 언어로. 설문 값을 서버에서 검증 |
 | 데이터 | SQLite(읽기 전용) + JSON | 제품 88개 규모라 DB 서버 불필요. 파일째 Git과 Docker 이미지에 들어감 |
-| AI | 코디세이 COPA `gpt-5.4` · OpenAI Python SDK | 과정 제공 API라 평가 기간 할당량 걱정 없음. 함수 호출·구조화 출력 사용 |
+| AI | 코디세이 COPA `gpt-5.4` · OpenAI Python SDK | 과정 제공 API의 함수 호출 활용. 사용량 제한은 별도이며 답변 JSON은 서버에서 검증 |
 | 배포 | Render 무료 Static Site + Docker Web Service | `production` 브랜치에 병합하면 자동 배포 |
 | 품질 | pytest 171 · Node 테스트 23 · 데이터 검사 14,587건 · GitHub Actions | AI 키 없이 PR마다 CI 4개 |
 
 ```
-[브라우저 React SPA] ──HTTPS──▶ [FastAPI · Render Docker]
+[브라우저 React SPA] ◀──HTTPS·JSON 요청 / 응답──▶ [FastAPI · Render Docker]
   동의 · 설문 · 추천                 policy.py     규칙 추천 · 성분 중복
   제품 찾기 · 상세 · 비교             repository.py SQLite 검색(RAG)
   AI 대화                            knowledge.py  영양 지식 카드 검색(RAG)
                                      agent.py      도구 선택 → 검색 → 인용 검증
                                      privacy.py    건강 개인정보 차단
-                                            │ 걸러진 질문 + 검색 결과만
-                                            ▼
+                                            ↕ 최소 입력·근거·도구 결과 / 도구 호출 요청·답변
                                      [코디세이 COPA gpt-5.4]
+
+[서버 내부 정책·조회·도구] ◀──조회 / 결과──▶ [읽기 전용 SQLite·JSON]
+[Agent] ◀──도구 호출 / 실행 결과──▶ [서버 내부의 허용된 도구]
 ```
+
+양방향 화살표는 요청·호출과 결과 반환을 뜻한다. 브라우저가 API에 직접 요청하며, DB·JSON은 서버 내부에서 읽기만 한다. GPT의 도구 요청은 서버가 검사·실행한다. 자료 수집 → 검수 → DB 구축 같은 처리 순서는 단방향으로 구분한다. [상세 아키텍처](docs/final/architecture.md)
 
 브랜치는 `main`(초기 프로토타입 보존) 아래 **`canary → dev → production`**으로 승격한다. 개발은 `canary`, CI 통과 후 `dev`, 운영 확인 뒤 `production`. `dev`·`production`은 PR과 CI 4개 통과가 필수이고 강제 push·삭제가 막혀 있다. 자세한 규칙은 [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -100,7 +115,7 @@
 | 배창민 | **문서작성**: 피드백 자료 수집 및 작성 |
 | 윤준서 | **문서작성**: 발표 자료(pdf) |
 
-[팀원별 상세 역할·증빙 표](docs/final/team-contributions.md). 역할 배정과 실제 개인 작성 이력을 구분한다. 현재 모든 커밋/PR 계정이 `sayknow`이므로 타인의 개인 작성 이력으로 임의 배정하지 않았다.
+[팀원별 상세 역할·기여 근거](docs/final/team-contributions.md). 확인된 계정은 `sayknow=이승현`, `jojunsu98=조준수`다. 역할 배정·변경 작성·PR 병합을 구분하며 다른 포크 계정의 실명은 확인 없이 배정하지 않는다.
 
 **라이선스**: 이 저장소의 코드와 문서는 [MIT License](LICENSE)를 따른다. 단, `data/products/`의 제품 표시·가격 데이터와 제품 사진은 다이소몰 공식 상품 페이지에서 가져온 것으로 출처 표기만 했으며 MIT 대상이 아니다. 영양 지식 카드의 원문은 NIH ODS·식약처 공개 자료다.
 
@@ -144,6 +159,7 @@ AI 키 없이 전부 돌아간다. Windows에서는 pytest 앞에 `set PYTHONUTF
 ```sh
 .venv/bin/python -m pytest -q                      # 서버 171
 python scripts/validate_product_database.py        # 데이터 14,587건
+python scripts/validate_final_docs.py              # 문서 목록·링크·코드 기준
 cd frontend && npm test && npm run build           # 화면 23 + 빌드
 ```
 
@@ -153,8 +169,8 @@ cd frontend && npm test && npm run build           # 화면 23 + 빌드
 backend/     FastAPI · agent.py(도구 7개) · policy.py(규칙 추천) · repository.py · knowledge.py · privacy.py · tests/
 frontend/    React · src/App.tsx · services.ts · connection.ts · tests/
 data/        products.sqlite3(검수 DB) · recommendation/classification-v2.json
-docs/        기획서 · 명세서 · 피드백 기록 · 발표 자료 · 개발 기록 · screenshots/
+docs/        final/README.md(문서 입구) · 기획/명세 · 상세 자료 · 과거 기록 · 발표 자료
 scripts/     데이터 검증 · 운영 API 점검
 ```
 
-문서 기준일 2026-10-24 · 운영 브랜치 `production` · 제품 표시 관찰일 2026-10-19
+문서 정리일 2026-10-29 · 운영 브랜치 `production` · 제품 표시 관찰일 2026-10-19. 위 검사 수는 보존된 실행 기록의 결과이며 이번 문서 정리로 새로 실행한 기능 검사가 아니다. 최신 브랜치 반영 범위와 남은 증빙은 [문서 전체 목차](docs/final/README.md)를 따른다.

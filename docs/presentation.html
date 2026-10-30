@@ -342,7 +342,7 @@ img.shot { width: 100%; border: 1px solid #ddd6cc; border-radius: 2mm; backgroun
         <tr><th style="width:18%">항목</th><th style="width:32%">불편</th><th>개선·사용자가 기대할 변화</th></tr>
         <tr><td>F01 주소</td><td>주소만으로 서비스를 알기 어려움</td><td><code>vitastep-guide</code>로 변경. 다시 찾기·공유 시 식별하기 쉬움 (<code>1e44b76</code>)</td></tr>
         <tr><td>F02 질문 범위</td><td>일반 영양 질문에 답하기 어려움</td><td>공식 지식 카드 35장·지식 도구. 제품 선택 전 일반 질문 가능 (<code>b1185bf</code>)</td></tr>
-        <tr><td>F03 첫 질문</td><td>‘함량과 기준량’에서 503</td><td>표시 읽기 안내 검색·인용. 첫 대화를 이어 감 (<code>c8fa914</code>, M03 3/3)</td></tr>
+        <tr><td>F03 검수 표식</td><td>상품사진 우하단에 있는 이 검수완료 라는 표식은 뭘 뜻하나요?</td><td>카드 배지 제거, 상세의 자체 검수 설명·출처·확인일 유지. 인증 오해를 줄임 (<b>조준수</b>, <code>d94c09b</code>·PR #15, 10/29 canary)</td></tr>
         <tr><td>F04 활력 추천</td><td>관심과 후보 이유의 연결이 약함</td><td>B 중심 직접 목적과 관련 성분 분리. 이유 이해를 도움 (<code>b75f847</code>, 대표 M04 2/3)</td></tr>
         <tr><td>F05 비슷한 후보</td><td>포장 변형을 반복해서 읽음</td><td>표시·제형·섭취법이 같은 제품군 대표 1개. 후보 차이에 집중 (<code>b75f847</code>)</td></tr>
       </table>
@@ -350,14 +350,15 @@ img.shot { width: 100%; border: 1px solid #ddd6cc; border-radius: 2mm; backgroun
     <div>
       <h2>피드백의 확인 범위</h2>
       <div class="card">
-        <p><b>팀 제공 날짜</b><br>10/22에 2건 · 10/23에 3건</p>
+        <p><b>기존 팀 제공 날짜</b><br>10/22에 2건 · 10/23에 3건</p>
+        <p class="small"><b>F03 질문 교체 10/30 · 구현 10/29</b><br>조준수의 canary 변경이다. 교체한 질문을 과거 날짜의 실제 발언으로 소급 확정하지 않는다. ‘검수완료’는 당시 ‘표시 검수’ 배지를 뜻한다.</p>
         <p class="small">요구 문구는 팀이 정리한 요약이며 참여자 발언의 직접 인용이 아니다. 현재 기준은 <code>docs/final/user-feedback.md</code>다.</p>
         <p class="small">실제 5명 참여·익명화 응답 원본·개선 후 재평가는 추가 확인 대상이다. 이전 작성본의 10/24 연령별 응답 주장은 현재 증빙에 합산하지 않는다.</p>
       </div>
       <p class="note"><b>5개 개선 항목 ≠ 5명 참여 증거.</b><br>기대하는 편의성 효과를 측정된 만족도나 시간 단축으로 표현하지 않는다. 변경 근거와 개발자 QA는 실제 사용자 평가와 구분한다.</p>
     </div>
   </div>
-  <div class="foot"><span>영양제 첫걸음 · 기준 2026-10-24 · 문서 정리 2026-10-29</span><span>11 / 12</span></div>
+  <div class="foot"><span>영양제 첫걸음 · 기준 2026-10-24 · F03 수정 2026-10-30</span><span>11 / 12</span></div>
 </section>
 
 <!-- 12 팀 -->

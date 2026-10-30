@@ -1,5 +1,5 @@
 {
-  "documentDate": "2026-10-29",
+  "documentDate": "2026-10-30",
   "baselineCommit": "0bc17dca34f3ec6479549248798e76bfcb962064",
   "homepage": "https://vitastep-guide.onrender.com/",
   "backend": "https://m2-1-api.onrender.com",
@@ -222,12 +222,12 @@
     "html": "docs/presentation.html",
     "pdf": "docs/presentation.pdf",
     "pages": 12,
-    "synchronizedOn": "2026-10-29",
+    "synchronizedOn": "2026-10-30",
     "scope": "Reviewed summary; source dates and unverified user/contribution evidence stay explicit.",
     "sha256": {
-      "markdown": "afe511c96ed7d5d65d610029eb94494326fa8de99a61e652e24dbb5bd0fd130c",
-      "html": "e4f6f38b4dee7b8c3e4d91d26085e7a40a07d3f476426430bd9027bdf64144f7",
-      "pdf": "6266cd89f0340c7e444c5a709c2b29e52aa7a1840201c582b75714bcb9459dea"
+      "markdown": "484461d967605b7476001e786f393986aa1c7d2f99a754e78041d47150621e39",
+      "html": "333fcff791bde7e1bd113ddb1b9165b6aa899e11d9d5e9491e9873dca6fcae91",
+      "pdf": "05e4c3bfee19106cafbbe124a3d855b215a81dc432426648fc03db876094c332"
     }
   },
   "demoVideo": {

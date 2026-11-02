@@ -1,5 +1,5 @@
 {
-  "documentDate": "2026-10-24",
+  "documentDate": "2026-10-30",
   "baselineCommit": "0bc17dca34f3ec6479549248798e76bfcb962064",
   "homepage": "https://vitastep-guide.onrender.com/",
   "backend": "https://m2-1-api.onrender.com",
@@ -43,24 +43,38 @@
   ],
   "team": [
     "이승현",
-    "윤준서",
-    "배창민",
+    "조준수",
     "김재욱",
-    "조준수"
+    "배창민",
+    "윤준서"
   ],
   "confirmedAccount": {
-    "sayknow": "이승현"
+    "sayknow": "이승현",
+    "jojunsu98": "조준수",
+    "etu9317cw": "윤준서",
+    "daguri2963": "배창민",
+    "woogie0403": "김재욱"
   },
   "submissionReady": false,
-  "pendingEvidence": [
-    "five actual target users with target eligibility and anonymized originals; test dates supplied by team",
-    "self-written contributions and individual evidence for all five members",
-    "presentation PDF"
-  ],
+  "pendingEvidence": [],
   "documents": [
     "README.md",
-    "docs/project-plan.md",
-    "docs/functional-requirements.md",
+    "CONTRIBUTING.md",
+    "docs/adult-intake-reference.md",
+    "docs/ai-counselor.md",
+    "docs/archive/project-plan-initial.md",
+    "docs/archive/user-feedback-2026-10-24.md",
+    "docs/backend-api.md",
+    "docs/backend-test-results.md",
+    "docs/catalog-research.md",
+    "docs/chat-label-reading-fix.md",
+    "docs/codyssey-gpt.md",
+    "docs/commit-history.md",
+    "docs/comparison-explanation.md",
+    "docs/copa-local-integration.md",
+    "docs/data-sources.md",
+    "docs/data-validation.md",
+    "docs/deployment.md",
     "docs/final/README.md",
     "docs/final/ai-design.md",
     "docs/final/architecture.md",
@@ -70,7 +84,22 @@
     "docs/final/team-contributions.md",
     "docs/final/test-results.md",
     "docs/final/user-feedback.md",
-    "docs/adult-intake-reference.md"
+    "docs/frontend-test-results.md",
+    "docs/functional-requirements.md",
+    "docs/presentation.md",
+    "docs/product-collection-report.md",
+    "docs/product-database.md",
+    "docs/product-label-review.md",
+    "docs/product-thumbnails.md",
+    "docs/project-plan.md",
+    "docs/recommendation-classification-v2.md",
+    "docs/recommendation-policy-v2.md",
+    "docs/recommendation-policy.md",
+    "docs/recommendation-v2-test-results.md",
+    "docs/ui-design.md",
+    "docs/user-feedback.md",
+    "docs/version-control.md",
+    "docs/presentation.html"
   ],
   "sourceSha256": {
     "backend/main.py": "a4a7366940a71e182897b4874719762e8874e68d9c5c55f661486ed053766946",
@@ -89,7 +118,7 @@
     "backend/label-guides.json": "4f05d76c468184f884a7c401656d4fd0b1a9264d5c40a087de6cf9e79b269793",
     "data/recommendation/classification-v2.json": "7623483b41acf814d3d6877027494930374812bef034b4b111a5ca7b36f120cf",
     "data/products/products.sqlite3": "92063ab4a509df594331dd5b46097f8aa2c37bb5b324f9d88a08553e06a4499e",
-    "frontend/src/App.tsx": "8fc004623e4bd98aa3d53aa5787a1d3e7ade9c8d7dde88ba56f6b14712af01e9",
+    "frontend/src/App.tsx": "9991259a5e5198150284d19b229b40f8e2295c76b2f317da0a4615887946b4a1",
     "frontend/src/services.ts": "3eaba9a8e4c5286b43adb220796aa891a2a577de1b5d8bff79cd135645fef68d",
     "frontend/src/domain.ts": "0256bf287034cb3423dd5d90b7f03b0453160d5b63a5279e112be457a46a3c6d",
     "frontend/src/CompareExplanation.tsx": "c8ba0cacabfdd29d00030dcc2237921d1969f33ee5c99f6d9665cfdd18d356da",
@@ -97,7 +126,7 @@
     "Dockerfile": "5d6236684be7f19ff427557e8d3185fa1c703a00f0566a1eb7c988aaabe2a4de",
     ".github/workflows/ci.yml": "e90e2fe234e99b361c4d6f99792cab914dfe7e659befe279118b2a84a855a11c",
     "frontend/src/data/product-chat-prompts.json": "6bf5a9df93497e3c22fe7b10e746b629d125cbf379efbd50e24846d507bd9fbe",
-    "frontend/src/styles.css": "6f0c07ba26d399df7a404f66faa0792adbcf29f87bedffb50268de1c029e2496",
+    "frontend/src/styles.css": "1f2f6b1b0307ffee868090877b78c669df789e8da9cb827feab1cf7d79d36e5d",
     "frontend/src/ChatNutritionSummary.tsx": "a238bfc18b24c3f098258529ee22f4e65380131e199f29551e9a98967fdd33d4",
     "backend/product_summary.py": "a2dca6944d975fab2af0af8fa7a9ed346b123194a91e1f184b1c78dc0aa3e7ab",
     "frontend/src/adult-intake.ts": "2dd7f3407ba92839dd38bf44fc2d4947ddefad796bb0177c1aec82bff50f3e96",
@@ -105,8 +134,8 @@
     "data/references/kdri-2025-summary-ko.pdf": "605ff8431ea7b6c465165bb5335aba580dcd4d56ba13a69583e62d163a7cc0c2"
   },
   "sourceSnapshot": {
-    "baseCommit": "4eedc4e329028f560857b241d5290d1fdd07e88b",
-    "status": "canary survey follow-up after product chat changeset; production deployment pending",
+    "baseCommit": "ab3e8bfd175ebe0e3c2669d8cd65755164157d5a",
+    "status": "canary ab3e8bf plus local documentation organization; branch promotion and live deployment are separate",
     "changesAfterBaseline": [
       "frontend/src/App.tsx",
       "frontend/src/services.ts",
@@ -118,9 +147,10 @@
       "frontend/src/adult-intake.ts",
       "frontend/src/data/adult-intake-references.json",
       "data/references/kdri-2025-summary-ko.pdf",
-      "frontend/src/domain.ts"
+      "frontend/src/domain.ts",
+      "frontend/index.html"
     ],
-    "reason": "Local canary product overview and starter follow-up; quantities from reviewed DB, adult RNI/AI comparison calculated in-browser from verified 2025 Korean reference tables, short AI prose and collapsed labels. Original API evidence baseline remains separate.",
+    "reason": "Current code hashes include product chat, official adult RNI/AI ratios, survey simplification and PR #15 dark mode. Original API evidence baseline remains 0bc17dc.",
     "evidence": [
       "docs/final/evidence/product-context-prompts-local.json",
       "docs/final/evidence/product-nutrition-overview-local.json",
@@ -133,5 +163,193 @@
     "groups": 10,
     "values": 250,
     "sourceSha256": "605ff8431ea7b6c465165bb5335aba580dcd4d56ba13a69583e62d163a7cc0c2"
+  },
+  "evidenceDate": "2026-10-24",
+  "documentationGuide": {
+    "index": "docs/final/README.md",
+    "canonicalByTopic": {
+      "serviceAndExecution": "README.md",
+      "planning": "docs/project-plan.md",
+      "functionalRequirements": "docs/functional-requirements.md",
+      "architecture": "docs/final/architecture.md",
+      "aiDesign": "docs/final/ai-design.md",
+      "recommendationPolicy": "docs/recommendation-policy-v2.md",
+      "adultIntakeReference": "docs/adult-intake-reference.md",
+      "productDatabase": "docs/product-database.md",
+      "userFeedback": "docs/final/user-feedback.md",
+      "teamContributions": "docs/final/team-contributions.md",
+      "testResults": "docs/final/test-results.md",
+      "progress": "docs/final/progress.md",
+      "commitHistory": "docs/commit-history.md",
+      "securityAndOperations": "docs/final/security-and-operations.md",
+      "contributing": "CONTRIBUTING.md",
+      "presentationContent": "docs/presentation.md"
+    },
+    "supportingDocuments": [
+      "docs/product-label-review.md",
+      "docs/product-collection-report.md",
+      "docs/product-thumbnails.md",
+      "docs/comparison-explanation.md",
+      "docs/final/presentation-outline.md"
+    ],
+    "historicalDocuments": [
+      "docs/ai-counselor.md",
+      "docs/backend-api.md",
+      "docs/backend-test-results.md",
+      "docs/catalog-research.md",
+      "docs/chat-label-reading-fix.md",
+      "docs/codyssey-gpt.md",
+      "docs/copa-local-integration.md",
+      "docs/data-sources.md",
+      "docs/data-validation.md",
+      "docs/deployment.md",
+      "docs/frontend-test-results.md",
+      "docs/recommendation-classification-v2.md",
+      "docs/recommendation-policy.md",
+      "docs/recommendation-v2-test-results.md",
+      "docs/ui-design.md",
+      "docs/version-control.md",
+      "docs/archive/project-plan-initial.md",
+      "docs/archive/user-feedback-2026-10-24.md"
+    ],
+    "compatibilityDocuments": {
+      "docs/user-feedback.md": "docs/final/user-feedback.md"
+    },
+    "archivedFeedbackSha256": "06445f724b4672b1c6476b1c4e90fc87fc82a17225fe564e2663453ce0558231"
+  },
+  "presentation": {
+    "markdown": "docs/presentation.md",
+    "html": "docs/presentation.html",
+    "pdf": "docs/presentation.pdf",
+    "pages": 12,
+    "synchronizedOn": "2026-10-30",
+    "scope": "Reviewed summary with source dates, project-owner-confirmed document/video contributions and feedback summaries; final assessment remains separate.",
+    "sha256": {
+      "markdown": "eaab09ce0259d1115736f36863082756918d5206cc2696e181b0dd5bdacb31c5",
+      "html": "4ea5fa55a1d22f09b390ecac56c03bf4f555a1d8250a9b50a7bb53f86dd00716",
+      "pdf": "ab8636d34cc19296db640902952d5c9024c25aa5e67b50506c5e45f1b91c9cc0"
+    }
+  },
+  "demoVideo": {
+    "url": "https://github.com/user-attachments/assets/e1b11032-857d-4f4f-adaf-324229cd083b",
+    "attachedOn": "2026-10-30",
+    "originalFilename": "시연영상_v1.mp4",
+    "bytes": 8550582,
+    "durationSeconds": 172.2,
+    "container": "mp4",
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "sha256": "bc79096fd0dcbc0f727cf759ffdc790cf99d165f592a5b09ae0af26b48a5116e",
+    "readmeSection": "README.md#시연-영상",
+    "creator": "윤준서",
+    "creatorConfirmedOn": "2026-10-30",
+    "attributionSource": "project owner statement"
+  },
+  "submissionReview": {
+    "status": "pending_final_review_and_production_promotion",
+    "remainingActions": [
+      "team members review contribution summaries",
+      "promote latest changes and verify production",
+      "connect repository and submit on platform"
+    ],
+    "technicalChecksDoNotDetermineFinalAssessment": true
+  },
+  "teamContributionConfirmation": {
+    "date": "2026-10-30",
+    "source": "project owner statement",
+    "documentContributors": [
+      "김재욱",
+      "배창민",
+      "윤준서"
+    ],
+    "demoVideoCreator": "윤준서",
+    "githubAccountsLimitedToVerifiedMapping": true,
+    "accountMappingConfirmedOn": "2026-10-30"
+  },
+  "feedbackReporting": {
+    "method": "team-provided question summaries and documented improvements",
+    "individualResponseAttachmentsRequiredByProject": false,
+    "minimumActualTargetUsersRequired": 5,
+    "developerQACountedAsActualUsers": false
+  },
+  "forkContributions": [
+    {
+      "person": "윤준서",
+      "proposerAccount": "etu9317cw",
+      "repository": "etu9317cw/M2-1",
+      "pullRequest": 12,
+      "commits": [
+        {
+          "sha": "c8b94625d787c7221fcbff4d6d8241497572e530",
+          "authorAccount": "etu9317cw",
+          "url": "https://github.com/sayknow/M2-1/commit/c8b94625d787c7221fcbff4d6d8241497572e530"
+        },
+        {
+          "sha": "628b141263b8042a41c2ceccc3669383d8e66e89",
+          "authorAccount": "etu9317cw",
+          "url": "https://github.com/sayknow/M2-1/commit/628b141263b8042a41c2ceccc3669383d8e66e89"
+        }
+      ],
+      "mergedOnKst": "2026-10-28",
+      "forkUrl": "https://github.com/etu9317cw/M2-1",
+      "pullRequestUrl": "https://github.com/sayknow/M2-1/pull/12",
+      "parentRepository": "sayknow/M2-1",
+      "targetBranch": "canary",
+      "mergedBy": "sayknow",
+      "verifiedOn": "2026-10-30",
+      "accountMappingSource": "project owner statement"
+    },
+    {
+      "person": "배창민",
+      "proposerAccount": "daguri2963",
+      "repository": "daguri2963/M2-1",
+      "pullRequest": 13,
+      "commits": [
+        {
+          "sha": "21865efb6d2af037fdf39eaf59d4bd0c20bbf709",
+          "authorAccount": "daguri2963",
+          "url": "https://github.com/sayknow/M2-1/commit/21865efb6d2af037fdf39eaf59d4bd0c20bbf709"
+        }
+      ],
+      "mergedOnKst": "2026-10-29",
+      "forkUrl": "https://github.com/daguri2963/M2-1",
+      "pullRequestUrl": "https://github.com/sayknow/M2-1/pull/13",
+      "parentRepository": "sayknow/M2-1",
+      "targetBranch": "canary",
+      "mergedBy": "sayknow",
+      "verifiedOn": "2026-10-30",
+      "accountMappingSource": "project owner statement"
+    },
+    {
+      "person": "김재욱",
+      "proposerAccount": "woogie0403",
+      "repository": "woogie0403/M2-1-final",
+      "pullRequest": 14,
+      "commits": [
+        {
+          "sha": "ff2d34822bbb2261668d56b9375e028eff7d27fb",
+          "authorAccount": "love4xox",
+          "url": "https://github.com/sayknow/M2-1/commit/ff2d34822bbb2261668d56b9375e028eff7d27fb",
+          "authorIdentityStatus": "unconfirmed"
+        }
+      ],
+      "mergedOnKst": "2026-10-29",
+      "forkUrl": "https://github.com/woogie0403/M2-1-final",
+      "pullRequestUrl": "https://github.com/sayknow/M2-1/pull/14",
+      "parentRepository": "sayknow/M2-1",
+      "targetBranch": "canary",
+      "mergedBy": "sayknow",
+      "verifiedOn": "2026-10-30",
+      "accountMappingSource": "project owner statement"
+    }
+  ],
+  "unidentifiedAccounts": {
+    "love4xox": {
+      "identityStatus": "unconfirmed",
+      "teamMembership": "unconfirmed",
+      "countedAsConfirmedTeamAccount": false,
+      "source": "project owner correction",
+      "updatedOn": "2026-10-30"
+    }
   }
 }

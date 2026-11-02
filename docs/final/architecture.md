@@ -1,28 +1,45 @@
 # 시스템 아키텍처
 
+[문서 전체 목차](README.md) · [서비스 소개·실행](../../README.md)
+
 2026-10-24 · 운영 코드 `0bc17dc` · [제출 목차](README.md)
+
+도식 수정: 2026-10-29 · 통신·함수 호출의 요청/결과 반환을 구분했다. 기존 운영 검사 기준일과 코드 기준은 그대로 보존한다.
 
 ## 구성과 데이터 경계
 
 ```mermaid
 flowchart TD
-    U[모바일·PC 브라우저] --> F[Render 정적 사이트 / React]
-    F -->|HTTPS·JSON| A[FastAPI / Docker]
-    A --> G[동의·입력·요청 제한·개인정보 경계]
-    G --> P[결정적 후보 정책·중복 검사]
-    G --> C[공개 목록·상세·비교]
-    G --> X[Agent 또는 비교 해설]
-    P --> D[(읽기 전용 SQLite)]
-    C --> D
-    X --> T[선택된 검색·조회 도구]
-    T --> D
-    T --> K[공식 지식 카드·표시 안내]
-    X -->|최소화된 입력·검색 근거| L[COPA / GPT-5.4]
-    L --> V[스키마·출처·제품·수치 검증]
-    V --> A
+    U[모바일·PC 브라우저 / React 실행] <-->|HTTPS 파일 요청 / 정적 파일 응답| F[Render Static Site]
+    U <-->|HTTPS·JSON 요청 / 결과·오류 응답| A[FastAPI / Docker]
+    A <-->|요청 전달 / 처리 결과| G[동의·입력·요청 제한·개인정보 경계]
+    G <-->|설문 / 후보·중복 결과| P[결정적 후보 정책·중복 검사]
+    G <-->|조회 조건 / 제품·비교표| C[공개 목록·상세·비교]
+    G <-->|허용 입력 / 검증된 답변·오류| X[Agent 또는 비교 해설 / 출력 검증]
+    P <-->|정량 조회 / 반환| D[(읽기 전용 SQLite)]
+    P <-->|목적 조회 / 반환| R[제품 목적 분류 JSON]
+    C <-->|제품 조회 / 반환| D
+    X <-->|Agent 도구 호출 / 결과| T[서버 내부의 허용된 검색·조회 도구]
+    T <-->|표시 근거 조회 / 반환| D
+    T <-->|검색 / 공식 근거| K[공식 지식 카드·표시 안내]
+    X <-->|HTTPS 입력·근거·도구 결과 / 도구 요청·답변| L[COPA / GPT-5.4]
 ```
 
-그림의 AI 경로는 여러 번 왕복할 수 있다. 일반 API 응답은 AI를 거치지 않는다. Agent의 도구 선택과 최종 답변 생성은 COPA를 호출하며, 선택된 도구의 실제 조회는 서비스 서버에서 수행한다. 비교 해설은 고정된 별도 생성 경로다.
+양방향 화살표는 **요청 또는 함수 호출과 그 결과 반환**을 뜻하며, 양쪽이 데이터를 수정한다는 뜻은 아니다. 브라우저는 정적 사이트에서 React 파일을 받은 뒤 API 서버에 직접 요청한다. 정적 사이트 서버가 API 요청을 중계하지 않는다. 외부 통신은 HTTPS이고, 서버 내부 모듈·SQLite·JSON 연결은 로컬 함수 호출/파일 조회다. SQLite와 JSON은 운영 중 읽기 전용이다.
+
+그림의 AI 경로는 여러 번 왕복할 수 있다. COPA가 도구 이름·인자를 요청하면 Agent가 허용 목록과 인자를 검사하고 서버 내부 도구를 실행한 뒤 결과를 COPA에 돌려준다. COPA가 DB에 직접 연결하지 않는다. 최종 생성 답변의 스키마·출처·제품·수치는 서버에서 검증하고 화면에 응답한다. 비교 해설은 도구 선택 루프를 사용하지 않는 고정 생성 경로다. 일반 목록·상세·비교표 응답은 AI를 거치지 않는다.
+
+자료 구축의 **수집 → 원문 대조·검수 → SQLite·JSON 생성 → 배포**와 아래의 단계별 실행 흐름은 작업 순서를 뜻하므로 단방향으로 유지한다. 이 자료 구축은 운영 서버의 제품 데이터 쓰기 경로가 아니다.
+
+### 연결별 요청과 반환
+
+| 연결 | 요청·호출 | 응답·결과 | 코드 |
+|---|---|---|---|
+| 브라우저 ↔ FastAPI | 동의·설문·질문·조회 조건 | 세션·추천·제품·답변 또는 오류 | [services.ts](../../frontend/src/services.ts), [main.py](../../backend/main.py) |
+| 서버 ↔ SQLite | 공개 검수 뷰의 제품·표시·정량 조회 | 조회한 행·근거 | [repository.py](../../backend/repository.py), `mode=ro` |
+| Agent ↔ 내부 도구 | 허용된 도구 이름·검증한 인자 | 제품·근거·정책 결과 | [agent.py](../../backend/agent.py), `execute` |
+| 서버 ↔ 공식 자료 JSON | 지식 질의·표시 주제·제품 목적 조회 | 지식 카드·표시 안내·분류 결과 | [knowledge.py](../../backend/knowledge.py), [label_guide.py](../../backend/label_guide.py), [classification.py](../../backend/classification.py) |
+| Agent·비교 해설 ↔ COPA | 최소화한 입력·검색 근거·도구 실행 결과 | 도구 호출 요청 또는 생성 답변 | [copa.py](../../backend/copa.py), [comparison.py](../../backend/comparison.py) |
 
 | 영역 | 보관/처리 | 경계 |
 |---|---|---|
@@ -40,24 +57,11 @@ flowchart TD
 4. **AI 비교 해설:** 선택 품번2개 → 표시 비교 사실/출처 ID 생성 → 공용 캐시 확인 → GPT 생성·서버 검증. 제품 교체 시 화면은 이전 해설을 숨긴다. 실패해도 공개 표시표는 유지된다.
 5. **철회:** UI 입력·대화·임시 토큰 초기화 및 서버 세션 폐기. 이미 외부로 전송한 정보의 삭제를 소급 보장하는 기능은 아니다.
 
-## API 계약 요약
+## API 계약과 응답 경로
 
-기준 구현: [main.py](../../backend/main.py), [models.py](../../backend/models.py). 입력은 Pydantic으로 허용 필드/선택지/길이를 검증한다. 아래는 핵심 응답 필드이며 전체 예시는 실제 [API 검사 기록](evidence/acceptance-api.json)을 참조한다.
+경로별 입력·인증·응답·오류의 기준은 [기능 요구 명세서 5.2](../functional-requirements.md#52-api)에서 관리한다. 실제 구현은 [main.py](../../backend/main.py)·[models.py](../../backend/models.py), 실행 결과는 [API 원본](evidence/acceptance-api.json)을 확인한다.
 
-| 경로 | 입력/인증 | 핵심 응답·상태 |
-|---|---|---|
-| GET `/api/health` | 공개 | `ready`, `aiConfigured`, `aiProvider`, `aiModel`, `consentVersion`, `policyVersion` |
-| POST `/api/sessions` | 성인/정보 처리/AI 동의·현재 버전·provider=codyssey | 임시 `token`, `expiresIn`; 동의 누락400 |
-| DELETE `/api/sessions/current` | `X-Session-Token` | `deleted`; 철회 후 보호 요청401 |
-| GET `/api/products` | 공개 | `products` 87개 |
-| GET `/api/products/{id}` | 공개 | 상세 표시·사진·출처·확인일; 보류/없음404 |
-| POST `/api/compare` | 서로 다른 `productIds` 정확히2개, 공개 | `products`, `rows`; 잘못된 선택422 |
-| POST `/api/overlap` | 제품1~10개, 동의 토큰 | `duplicates`, 합산 가능 여부·표시 합계 |
-| POST `/api/recommendations` | Survey, 동의 토큰 | `status`, `products`, `reasons`, `evidence`, 정책/분류 버전, `ai` |
-| POST `/api/chat` | 질문≤300자·선택 productId/설문/이력, 동의 토큰 | `mode`, `text`, `citations`, `productIds`, `toolTrace`; 후속 로컬 성분 요약은 선택적 `nutritionSummary` |
-| POST `/api/compare/explanation` | 서로 다른 품번2개, 동의 토큰 | 해설·구조화 차이·인용·`version`, `cached` |
-
-추천 상태 `ok/restricted/insufficient/empty`와 AI 모드를 분리한다. 일반 오류 형식은 `{"error":{"code":"…","message":"…"}}`다. 동의401·입력422·제품404·요청 제한429·외부 AI 장애 등을 구분한다. 대화 근거 부족은 정보 부족 응답으로 안내하며, 실제 장애를 성공 답변으로 바꾸지 않는다.
+공개 목록·상세·표시 비교는 AI를 거치지 않는다. 추천·대화·AI 비교 해설은 동의 세션과 입력 경계를 거친다. 추천의 `ok/restricted/insufficient/empty` 상태와 AI 성공/실패는 별도 필드이며, 서버는 처리 결과 또는 `error.code/message`를 브라우저로 반환한다. 동의 401·입력 422·제품 404·요청 제한 429·외부 AI 장애를 구분한다.
 
 ## DB와 원본 추적
 

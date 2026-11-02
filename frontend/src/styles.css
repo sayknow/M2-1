@@ -64,3 +64,61 @@
 .chat-reference-source{display:inline-block;font-size:10px;color:#87604f;text-decoration:underline;line-height:1.7;margin-top:8px}
 .chat-nutrition-table td small{font-size:9px;color:#77716c;line-height:1.6}
 @media(max-width:760px){.adult-reference-picker select{font-size:12px}.chat-nutrition-table td small{font-size:8px}}
+
+/* Theme controls share the header on desktop and mobile. */
+.header-actions{display:flex;align-items:center;gap:16px;flex-shrink:0}
+.theme-toggle{display:flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;padding:8px;border:1px solid var(--line);border-radius:8px;font-size:12px;white-space:nowrap}
+.theme-toggle:hover{background:#f5f4f2}
+@media(max-width:1000px){.theme-toggle span{display:none}}
+@media(max-width:760px){.header-actions{gap:8px}}
+@media(max-width:400px){.header-catalog span{display:none}}
+
+/* Dark colors are scoped to the user's choice; product photos keep their original colors. */
+:root[data-theme="dark"]{color-scheme:dark;color:#e9ebf0;background:#17191f;--red:#ff8895;--red-dark:#ffa5ae;--line:#414653;--muted:#b5bac6;--green:#9bd3b2;--shadow:0 5px 18px #0002;--theme-surface:#22252d;--theme-raised:#2b303a;--theme-text:#e9ebf0;--theme-muted:#b5bac6}
+:root[data-theme="dark"] :is(.site-header,.journey-card,.product-card,.surface,.option,.choice-chip,.search-box,.compare-add,.empty-state,.loading-state,.floating-compare,.mobile-nav,.replacement-dialog,.candidate-reasons,.chat-composer,.chat-nutrition-facts,.compare-ai-highlights>article,.compare-ai-sources a,.skip-link){background:var(--theme-surface);border-color:var(--line);color:var(--theme-text)}
+:root[data-theme="dark"] :is(.site-footer,.home-hero,.learning-banner,.hero-orbit,.comparison-head,.comparison-row h3,.tag,.basis-box,.compare-ai-guide,.chat-message.assistant,.stepper li>span,.empty-icon){background:var(--theme-raised);border-color:var(--line);color:var(--theme-text)}
+:root[data-theme="dark"] :is(.chat-messages,.compare-explanation){background:var(--theme-surface);border-color:var(--line)}
+:root[data-theme="dark"] :is(.button.secondary,.prompt-chips button,.mini-product,.replace-option,.adult-reference-picker select){background:var(--theme-surface);border-color:var(--line);color:var(--theme-text)}
+:root[data-theme="dark"] :is(.button.secondary:hover,.theme-toggle:hover,.prompt-chips button:hover,.mini-product:hover,.replace-option:hover){background:var(--theme-raised)}
+:root[data-theme="dark"] .button.primary{background:#b92436;color:#fff}
+:root[data-theme="dark"] .button.primary:hover{background:#cd2d41}
+:root[data-theme="dark"] :is(.theme-toggle[aria-pressed="true"],.option.checked,.choice-chip.active,.compare-add.selected,.compare-add:hover,.mini-product.selected,.tag.pink,.nav-count,.journey-icon,.circle-icon,.chat-avatar,.welcome-spark,.compare-ai-icon){background:#402731;border-color:#a95364;color:#ffb4be}
+:root[data-theme="dark"] :is(.note,.server-notice){background:#3b3323;border-color:#786748;color:#e7d5ae}
+:root[data-theme="dark"] :is(.note>svg,.note strong){color:inherit}
+:root[data-theme="dark"] :is(.note.pink,.form-error,.chat-error,.chat-message.user){background:#402731;border-color:#a95364;color:#ffb4be}
+:root[data-theme="dark"] :is(.tag.green,.stepper li.done>span){background:#253b32;color:var(--green)}
+:root[data-theme="dark"] :is(.home-kicker,.brand small,.hero-copy>p,.hero-secondary,.home-prototype,.section-title .eyebrow,.journey-card p,.journey-num,.journey-card>svg,.card-meta>span:first-child,.card-package,.card-price small,.card-components,.data-foot,.card-evidence,.learning-banner p,.footer-inner p,.footer-inner>a,.page-heading p,.survey-top,.back-link,.selection-hint,.privacy-foot,.picker-row small,.muted,.section-mini a,.next-help p,.demo-states,.empty-state>p,.loading-state,.detail-breadcrumb,.detail-overview .brand-label,.detail-price small,.detail-key-info span,.detail-aside p,.comparison-head>span,.comparison-row h3,.chat-panel-header span,.chat-welcome p,.chat-composer p,.replacement-dialog>p,.adult-reference-picker,.chat-reference-note,.chat-nutrition-table small,.chat-nutrition-table td small,.chat-nutrition-table thead th,.compare-ai-notice,.compare-ai-sources small,.compare-fact dt){color:var(--theme-muted)}
+:root[data-theme="dark"] :is(.home-prototype strong,.hero-float strong,.footer-inner strong,.loading-state h2,.detail-breadcrumb a,.basis-box strong,.chat-nutrition-facts h3,.chat-plain-heading,.search-box input,.chat-composer textarea){color:var(--theme-text)}
+:root[data-theme="dark"] :is(.card-evidence a,.compare-fact summary,.compare-ai-sources summary,.chat-reference-source){color:#e3b5a3}
+:root[data-theme="dark"] :is(.option-symbol,.option-symbol>span,.option-check,.stepper li){color:var(--theme-muted)}
+:root[data-theme="dark"] :is(.option.checked .option-symbol,.option.checked .option-check,.stepper li.current){color:var(--red)}
+:root[data-theme="dark"] .stepper li.current>span{background:#b92436;color:#fff}
+:root[data-theme="dark"] .stepper li.done{color:var(--green)}
+:root[data-theme="dark"] .stepper small{background:#17191f}
+:root[data-theme="dark"] .stepper li:after{background:var(--line)}
+:root[data-theme="dark"] :is(.mobile-nav>a,.slot-add span,.compare-controls,.inline-empty){color:var(--theme-muted)}
+:root[data-theme="dark"] .mobile-nav>a[aria-current]{color:var(--red)}
+:root[data-theme="dark"] .mobile-nav i{background:#b92436;color:#fff}
+:root[data-theme="dark"] :is(.hero-label,.hero-float){background:var(--theme-surface);border-color:var(--line);color:var(--green)}
+:root[data-theme="dark"] .hero-visual{background:radial-gradient(ellipse at 50% 70%,#40352d 0,transparent 70%)}
+:root[data-theme="dark"] .hero-orbit{border-color:#39332f}
+:root[data-theme="dark"] .learning-icon{background:#354033;color:#c5d8b6}
+:root[data-theme="dark"] .compare-ai-products b{background:#49372f;color:#f0c7b5}
+:root[data-theme="dark"] :is(.comparison-head>*,.comparison-row,.comparison-row p,.comparison-row h3,.compare-fact,.chat-nutrition-table tbody th,.chat-nutrition-table td,.nutrient-list>div,.disclosure,.chat-panel-header,.replace-option){border-color:var(--line)}
+:root[data-theme="dark"] .remove-product{background:#22252de6;color:var(--theme-text)}
+:root[data-theme="dark"] .send-button{background:#b92436;color:#fff}
+:root[data-theme="dark"] .switch-track{background:#646b79}
+:root[data-theme="dark"] .switch-row input:checked+.switch-track{background:#b92436}
+:root[data-theme="dark"] .skeleton{background:linear-gradient(90deg,#292d36,#383e49,#292d36);background-size:200% 100%}
+:root[data-theme="dark"] input::placeholder,:root[data-theme="dark"] textarea::placeholder{color:#aab0bd;opacity:1}
+:root[data-theme="dark"] .detail-art .art-note{background:#ffffffec;color:#625c56}
+:root[data-theme="dark"] :is(.nutrient-list small,.disclosure p,.mini-product>span small,.mini-product>svg,.chat-context .section-mini svg,.slot-add){color:var(--theme-muted)}
+:root[data-theme="dark"] .slot-add strong{color:var(--theme-text)}
+:root[data-theme="dark"] :is(.caution-section h2,.message-label,.response-source){color:#ffb4be;border-color:var(--line)}
+:root[data-theme="dark"] :is(.mini-product-dot,.detail-aside .circle-icon){background:var(--theme-raised);color:var(--green)}
+
+:root[data-theme="dark"] :is(.readable,.switch-row,.compare-stack,.icon-button){color:var(--theme-muted)}
+:root[data-theme="dark"] .icon-button:hover{background:var(--theme-raised)}
+:root[data-theme="dark"] .compare-ai-loading svg{color:var(--red)}
+:root[data-theme="dark"] :is(button,a,input,textarea,summary):focus-visible{outline-color:var(--green)}
+:root[data-theme="dark"] .product-photo .photo-unavailable{color:#625c56}

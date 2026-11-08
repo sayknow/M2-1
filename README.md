@@ -2,6 +2,8 @@
 
 **[문서 전체 목차](docs/final/README.md)** · [서비스](https://vitastep-guide.onrender.com/) · [발표 PDF](docs/presentation.pdf)
 
+**운영 복구 · 2026-11-09:** 기존 코드를 새 무료 Python 서버로 옮겼습니다. 운영 사이트는 같은 주소를 유지하며, 17분 유휴 후 첫 접속에서 40.9초 안에 정상 화면으로 돌아왔습니다. [현재 배포 설정·복구 검증](docs/render-recovery-2026-11-09.md)
+
 다이소 영양제를 처음 고르는 성인을 위한 **설문 추천 · 두 제품 비교 · 출처 있는 AI 상담** 웹 서비스.
 
 ## 시연 영상
@@ -64,13 +66,13 @@ https://github.com/user-attachments/assets/e1b11032-857d-4f4f-adaf-324229cd083b
 |---|---|---|
 | 프런트 | React 19 · TypeScript · Vite | 매장에서 폰으로 쓰는 단일 화면. 정적 빌드라 무료 호스팅 |
 | 서버 | Python 3.13 · FastAPI · Pydantic | 수집·검수 스크립트가 Python이라 같은 언어로. 설문 값을 서버에서 검증 |
-| 데이터 | SQLite(읽기 전용) + JSON | 제품 88개 규모라 DB 서버 불필요. 파일째 Git과 Docker 이미지에 들어감 |
+| 데이터 | SQLite(읽기 전용) + JSON | 제품 88개 규모라 DB 서버 불필요. 파일째 Git과 서버 배포에 포함 |
 | AI | 코디세이 COPA `gpt-5.4` · OpenAI Python SDK | 과정 제공 API의 함수 호출 활용. 사용량 제한은 별도이며 답변 JSON은 서버에서 검증 |
-| 배포 | Render 무료 Static Site + Docker Web Service | `production` 브랜치에 병합하면 자동 배포 |
+| 배포 | Render 무료 Static Site + Python Web Service | `production` 브랜치 기준, CI 통과 후 자동 배포 |
 | 품질 | pytest 171 · Node 테스트 23 · 데이터 검사 14,587건 · GitHub Actions | AI 키 없이 PR마다 CI 4개 |
 
 ```
-[브라우저 React SPA] ◀──HTTPS·JSON 요청 / 응답──▶ [FastAPI · Render Docker]
+[브라우저 React SPA] ◀──HTTPS·JSON 요청 / 응답──▶ [FastAPI · Render Python]
   동의 · 설문 · 추천                 policy.py     규칙 추천 · 성분 중복
   제품 찾기 · 상세 · 비교             repository.py SQLite 검색(RAG)
   AI 대화                            knowledge.py  영양 지식 카드 검색(RAG)

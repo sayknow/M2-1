@@ -1,8 +1,8 @@
 {
-  "documentDate": "2026-10-30",
+  "documentDate": "2026-11-09",
   "baselineCommit": "0bc17dca34f3ec6479549248798e76bfcb962064",
   "homepage": "https://vitastep-guide.onrender.com/",
-  "backend": "https://m2-1-api.onrender.com",
+  "backend": "https://vitastep-api-recovery.onrender.com",
   "provider": "codyssey",
   "model": "gpt-5.4",
   "policyVersion": "2026-10-23.2",
@@ -58,8 +58,8 @@
   "submissionReady": false,
   "pendingEvidence": [],
   "documents": [
-    "README.md",
     "CONTRIBUTING.md",
+    "README.md",
     "docs/adult-intake-reference.md",
     "docs/ai-counselor.md",
     "docs/archive/project-plan-initial.md",
@@ -86,6 +86,7 @@
     "docs/final/user-feedback.md",
     "docs/frontend-test-results.md",
     "docs/functional-requirements.md",
+    "docs/presentation.html",
     "docs/presentation.md",
     "docs/product-collection-report.md",
     "docs/product-database.md",
@@ -96,10 +97,10 @@
     "docs/recommendation-policy-v2.md",
     "docs/recommendation-policy.md",
     "docs/recommendation-v2-test-results.md",
+    "docs/render-recovery-2026-11-09.md",
     "docs/ui-design.md",
     "docs/user-feedback.md",
-    "docs/version-control.md",
-    "docs/presentation.html"
+    "docs/version-control.md"
   ],
   "sourceSha256": {
     "backend/main.py": "a4a7366940a71e182897b4874719762e8874e68d9c5c55f661486ed053766946",
@@ -190,7 +191,8 @@
       "docs/product-collection-report.md",
       "docs/product-thumbnails.md",
       "docs/comparison-explanation.md",
-      "docs/final/presentation-outline.md"
+      "docs/final/presentation-outline.md",
+      "docs/render-recovery-2026-11-09.md"
     ],
     "historicalDocuments": [
       "docs/ai-counselor.md",
@@ -351,5 +353,19 @@
       "source": "project owner correction",
       "updatedOn": "2026-10-30"
     }
+  },
+  "operatingDeployment": {
+    "verifiedOnKst": "2026-11-09",
+    "sourceCommit": "4492a7147e55008567f18cd625e8b9f408bb70f5",
+    "backend": "https://vitastep-api-recovery.onrender.com",
+    "serviceId": "srv-dbo8alm7bikc7387o7m0",
+    "region": "oregon",
+    "runtime": "python",
+    "pythonVersion": "3.13.15",
+    "plan": "free",
+    "autoDeploy": "After CI Checks Pass",
+    "report": "docs/render-recovery-2026-11-09.md",
+    "evidence": "docs/final/evidence/render-recovery-2026-11-09.json",
+    "productionBrowserColdSeconds": 40.905
   }
 }

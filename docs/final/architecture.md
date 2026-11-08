@@ -6,12 +6,14 @@
 
 도식 수정: 2026-10-29 · 통신·함수 호출의 요청/결과 반환을 구분했다. 기존 운영 검사 기준일과 코드 기준은 그대로 보존한다.
 
+운영 구성 갱신: 2026-11-09 · 동일 소스 `4492a71`을 Oregon/Python 무료 서버로 이전했다. 아래 배포 구성은 현재 운영 기준이며, 이전 검사 기록은 날짜별로 보존한다. [복구 검증](../render-recovery-2026-11-09.md)
+
 ## 구성과 데이터 경계
 
 ```mermaid
 flowchart TD
     U[모바일·PC 브라우저 / React 실행] <-->|HTTPS 파일 요청 / 정적 파일 응답| F[Render Static Site]
-    U <-->|HTTPS·JSON 요청 / 결과·오류 응답| A[FastAPI / Docker]
+    U <-->|HTTPS·JSON 요청 / 결과·오류 응답| A[FastAPI / Render Python]
     A <-->|요청 전달 / 처리 결과| G[동의·입력·요청 제한·개인정보 경계]
     G <-->|설문 / 후보·중복 결과| P[결정적 후보 정책·중복 검사]
     G <-->|조회 조건 / 제품·비교표| C[공개 목록·상세·비교]
@@ -73,9 +75,9 @@ DB: [products.sqlite3](../../data/products/products.sqlite3). 주요 관계는 `
 
 ## 배포와 버전 관리
 
-프런트는 Render 정적 배포, 백엔드는 저장소 루트 [Dockerfile](../../Dockerfile)로 Python3.13·잠금 의존성·backend·검수 SQLite·추천 분류를 포함한다. 프런트 썸네일은 정적 파일로 배포한다. 별도 DB 서비스나 영구 디스크는 사용하지 않는다. 새로운 데이터는 로컬에서 검수·재생성한 뒤 코드와 함께 배포한다.
+프런트는 Render 정적 배포, 운영 백엔드는 Oregon의 무료 Python Web Service다. `PYTHON_VERSION=3.13.15`로 고정하고 `backend/requirements.lock`을 설치한 뒤 Uvicorn으로 실행한다. 저장소의 backend·검수 SQLite·추천 분류를 함께 배포한다. 기존 [Dockerfile](../../Dockerfile)은 보존하지만 새 운영 서버의 실행 방식은 아니다. 프런트 썸네일은 정적 파일로 배포한다. 별도 DB 서비스나 영구 디스크는 사용하지 않는다. 새로운 데이터는 로컬에서 검수·재생성한 뒤 코드와 함께 배포한다.
 
-운영 주소는 프런트 `https://vitastep-guide.onrender.com`, API `https://m2-1-api.onrender.com`이다. 프런트 공개 `VITE_API_BASE_URL`과 서버 허용 출처를 맞춘다. 비밀키는 백엔드 환경변수에만 둔다. Render는 `production`을 배포하며 `canary → dev → production` 승격과 CI4개를 사용한다. 별도 시험 서버 없이 canary 로컬 검증을 먼저 한다. 자세한 절차는 [CONTRIBUTING](../../CONTRIBUTING.md)과 [보안·운영](security-and-operations.md)을 따른다.
+운영 주소는 프런트 `https://vitastep-guide.onrender.com`, API `https://vitastep-api-recovery.onrender.com`이다. 프런트 공개 `VITE_API_BASE_URL`과 서버 허용 출처를 맞춘다. 비밀키는 백엔드 환경변수에만 둔다. Render는 `production`을 배포하며 `canary → dev → production` 승격과 CI4개를 사용한다. 상시 시험 서버 없이 canary 로컬 검증을 먼저 한다. 복구 대조 시험 서버는 설정을 원복하고 중지했다. 자세한 절차는 [CONTRIBUTING](../../CONTRIBUTING.md), [보안·운영](security-and-operations.md), [현재 배포 설정](../render-recovery-2026-11-09.md)을 따른다.
 
 ## 구조의 한계
 

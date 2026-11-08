@@ -1,0 +1,125 @@
+{
+  "completedOnKst": "2026-11-09",
+  "sourceCommit": "4492a7147e55008567f18cd625e8b9f408bb70f5",
+  "operator": "developer QA with synthetic adult selections; not independent user feedback",
+  "codeChangedDuringRecovery": false,
+  "paidPlanEnabled": false,
+  "homepage": "https://vitastep-guide.onrender.com/",
+  "backend": "https://vitastep-api-recovery.onrender.com",
+  "backendServiceId": "srv-dbo8alm7bikc7387o7m0",
+  "region": "oregon",
+  "runtime": "python",
+  "plan": "free",
+  "pythonVersion": "3.13.15",
+  "frontendCutoverConfirmed": true,
+  "frontendBundle": "/assets/index-BZw8EaCE.js",
+  "functionalAcceptance": {
+    "checkedAtUtc": "2026-11-08T14:27:36.684498+00:00",
+    "passed": true,
+    "summary": {
+      "M01": {
+        "attempts": 3,
+        "successes": 3
+      },
+      "M02": {
+        "attempts": 3,
+        "successes": 3
+      },
+      "M03": {
+        "attempts": 3,
+        "successes": 3
+      },
+      "M04": {
+        "attempts": 3,
+        "successes": 3
+      },
+      "M05": {
+        "attempts": 3,
+        "successes": 3
+      },
+      "M06": {
+        "attempts": 3,
+        "successes": 3
+      },
+      "M07": {
+        "attempts": 3,
+        "successes": 3
+      },
+      "M09": {
+        "attempts": 3,
+        "successes": 3
+      },
+      "S01": {
+        "attempts": 3,
+        "successes": 3
+      }
+    }
+  },
+  "backendColdStart": {
+    "idleSecondsPlanned": 1020,
+    "ready": true,
+    "seconds": 31.512,
+    "within60Seconds": true
+  },
+  "productionBrowserColdStart": {
+    "idleSecondsPlanned": 1020,
+    "sleepSignalVerified": true,
+    "ready": true,
+    "seconds": 40.905,
+    "measuredAtUtc": "2026-11-08T15:15:38.483Z",
+    "site": "https://vitastep-guide.onrender.com/",
+    "coldSleepSignalVerified": true,
+    "heading": "영양제 고르기, 첫걸음은 가볍게.",
+    "products": 87
+  },
+  "postColdSmoke": {
+    "checkedAtUtc": "2026-11-08T15:15:57.112663+00:00",
+    "base": "https://vitastep-api-recovery.onrender.com",
+    "checks": [
+      {
+        "name": "health_and_cors",
+        "seconds": 0.448,
+        "passed": true,
+        "ready": true,
+        "aiConfigured": true
+      },
+      {
+        "name": "catalog",
+        "seconds": 0.675,
+        "passed": true,
+        "products": 87
+      },
+      {
+        "name": "detail",
+        "seconds": 0.357,
+        "passed": true,
+        "productId": "600000129"
+      },
+      {
+        "name": "comparison",
+        "seconds": 0.304,
+        "passed": true,
+        "products": 2
+      },
+      {
+        "name": "first_real_ai_after_cold_start",
+        "seconds": 14.761,
+        "passed": true,
+        "mode": "ai",
+        "citations": 2,
+        "tools": [
+          {
+            "tool": "search_evidence",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  "limitations": [
+    "Region and runtime changed together; provider-internal root cause not confirmed.",
+    "Observed timings do not guarantee all future free-tier startups.",
+    "No keepalive or recurring polling used to prevent idle shutdown."
+  ]
+}
